@@ -1,0 +1,2239 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     99784,       2231]
+NotebookOptionsPosition[     95740,       2108]
+NotebookOutlinePosition[     97351,       2159]
+CellTagsIndexPosition[     97023,       2147]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Phase Plane Dynamics of FitzHugh-Nagumo Model of Neuronal Excitation\
+\>", "DemoTitle",
+ CellChangeTimes->{{3.759098542696478*^9, 3.759098543248995*^9}, {
+   3.759098765476272*^9, 3.759098803146873*^9}, {3.759098872218028*^9, 
+   3.759098878672934*^9}, {3.759098918225642*^9, 3.759098922577147*^9}, 
+   3.75910009025737*^9, {3.759100163575657*^9, 3.759100164333541*^9}, {
+   3.759152297820547*^9, 3.7591523081831946`*^9}, {3.760899833155678*^9, 
+   3.7608998678481417`*^9}, {3.760899899856276*^9, 3.760899915981967*^9}, {
+   3.760900024365321*^9, 3.760900026302957*^9}},
+ ExpressionUUID -> "966dbb55-be27-4d10-8d77-684ff0e9e0b6"],
+
+Cell["", "InitializationSection",ExpressionUUID->"0524c0a8-e331-4d4a-914e-7a87906ed82a"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection",ExpressionUUID->"b109c254-e411-4cac-b0c3-2c81f1931f8b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "sol", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Solution", " ", "of", " ", "the", " ", "ODE", " ", "system"}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"sol", " ", "=", " ", 
+       RowBox[{"NDSolve", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Epsilon]", " ", 
+              RowBox[{
+               RowBox[{"v", "'"}], "[", "t", "]"}]}], "==", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"v", "[", "t", "]"}], 
+               RowBox[{"(", 
+                RowBox[{"1", "-", 
+                 RowBox[{"v", "[", "t", "]"}]}], ")"}], 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"v", "[", "t", "]"}], "-", "\[Alpha]"}], ")"}]}], 
+              "-", 
+              RowBox[{"w", "[", "t", "]"}], "+", "Iapp"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"w", "'"}], "[", "t", "]"}], " ", "\[Equal]", 
+             RowBox[{
+              RowBox[{"v", "[", "t", "]"}], "-", 
+              RowBox[{"\[Gamma]", " ", 
+               RowBox[{"w", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"v", "[", "0", "]"}], "\[Equal]", "v0"}], ",", 
+            RowBox[{
+             RowBox[{"w", "[", "0", "]"}], "\[Equal]", "w0"}]}], "}"}], "/.", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"v0", "\[Rule]", " ", 
+             RowBox[{"p", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+            RowBox[{"w0", "\[Rule]", " ", 
+             RowBox[{"p", "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"v", ",", "w"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "10"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Show", "[", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Plot", " ", "of", " ", "the", " ", "nullcline", " ", "curves", " ", 
+         "for", " ", "v", " ", "and", " ", "w"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ContourPlot", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"v", 
+               RowBox[{"(", 
+                RowBox[{"1", "-", "v"}], ")"}], 
+               RowBox[{"(", 
+                RowBox[{"v", "-", "\[Alpha]"}], ")"}]}], "-", "w", "+", 
+              "Iapp"}], "\[Equal]", "0"}], ",", 
+            RowBox[{
+             RowBox[{"v", "-", 
+              RowBox[{"\[Gamma]", " ", "w"}]}], "\[Equal]", "0"}], ",", 
+            RowBox[{"v", "\[Equal]", "\[Alpha]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"v", ",", "v1", ",", "v2"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"w", ",", "w1", ",", "w2"}], "}"}], ",", 
+          RowBox[{"Axes", "\[Rule]", " ", "True"}], ",", 
+          RowBox[{"PlotLegends", "\[Rule]", 
+           RowBox[{"Placed", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  FractionBox[
+                   RowBox[{"Style", "[", 
+                    RowBox[{"\"\<dv\>\"", ",", "Italic"}], "]"}], 
+                   RowBox[{"Style", "[", 
+                    RowBox[{"\"\<dt\>\"", ",", "Italic"}], "]"}]], ",", 
+                  "\"\< = 0\>\""}], "}"}], "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  FractionBox[
+                   RowBox[{"Style", "[", 
+                    RowBox[{"\"\<dw\>\"", ",", "Italic"}], "]"}], 
+                   RowBox[{"Style", "[", 
+                    RowBox[{"\"\<dt\>\"", ",", "Italic"}], "]"}]], ",", 
+                  "\"\< = 0\>\""}], "}"}], "]"}]}], "}"}], ",", "Above"}], 
+            "]"}]}], ",", 
+          RowBox[{"AxesLabel", " ", "\[Rule]", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<v\>\"", ",", 
+               RowBox[{"FontSize", "\[Rule]", "18"}], ",", "Italic", ",", 
+               "Black"}], "]"}], ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<w\>\"", ",", 
+               RowBox[{"FontSize", "\[Rule]", "18"}], ",", "Italic", ",", 
+               "Black"}], "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"ContourStyle", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Thickness", "[", "0.008", "]"}], ",", 
+               RowBox[{"CMYKColor", "[", 
+                RowBox[{"0", ",", "0.5", ",", "1"}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Thickness", "[", "0.008", "]"}], ",", 
+               RowBox[{"CMYKColor", "[", 
+                RowBox[{"1", ",", "0.25", ",", "0.5"}], "]"}]}], "}"}], ",", 
+             "Dashed"}], "}"}]}], ",", 
+          RowBox[{"Epilog", "\[Rule]", 
+           RowBox[{"Inset", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<\[Alpha]\>\"", ",", "18", ",", "Black"}], "]"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"\[Alpha]", "+", "0.05"}], ",", 
+               RowBox[{"-", "0.05"}]}], "}"}]}], "]"}]}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"Plot", " ", "of", " ", "derivative", " ", "vector"}], " ", 
+         "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"VectorPlot", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"v", 
+              RowBox[{"(", 
+               RowBox[{"1", "-", "v"}], ")"}], 
+              RowBox[{"(", 
+               RowBox[{"v", "-", "\[Alpha]"}], ")"}]}], "-", "w", "+", 
+             "Iapp"}], ",", 
+            RowBox[{"v", "-", 
+             RowBox[{"\[Gamma]", " ", "w"}]}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"v", ",", "v1", ",", "v2"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"w", ",", "w1", ",", "w2"}], "}"}], ",", 
+          RowBox[{"VectorStyle", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"Gray", ",", "\"\<PinDart\>\""}], "}"}]}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"ParametricPlot", "[", 
+         RowBox[{
+          RowBox[{"Evaluate", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"v", "[", "t", "]"}], ",", 
+              RowBox[{"w", "[", "t", "]"}]}], "}"}], "/.", "sol"}], "]"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "10"}], "}"}], ",", 
+          RowBox[{"PlotStyle", "\[Rule]", 
+           RowBox[{"Directive", "[", 
+            RowBox[{"CMYKColor", "[", 
+             RowBox[{"0.5", ",", "1", ",", "0.5"}], "]"}], "]"}]}]}], "]"}]}],
+        "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<model parameters\>\"", ",", "12"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Epsilon]", ",", "0.01", ",", "\"\<\[Epsilon]\>\""}], "}"}], 
+     ",", "0.001", ",", "1", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Gamma]", ",", "0.5", ",", "\"\<\[Gamma]\>\""}], "}"}], ",", 
+     "0.0", ",", "1", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Alpha]", ",", "0.1", ",", "\"\<\[Alpha]\>\""}], "}"}], ",", 
+     "0.0", ",", "1", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Iapp", ",", "0.5", ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<I\>\"", ",", "Italic"}], "]"}], ",", "\"\<app\>\""}], 
+        "]"}]}], "}"}], ",", "0.0", ",", "1", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<v\>\"", ",", "Italic"}], "]"}], ",", "\"\< and \>\"", 
+        ",", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<w\>\"", ",", "Italic"}], "]"}], ",", 
+        "\"\< ranges\>\""}], "}"}], "]"}], ",", "12"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"v1", ",", 
+       RowBox[{"-", "0.5"}], ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<v\>\"", ",", "Italic"}], "]"}], ",", "\"\<left\>\""}], 
+        "]"}]}], "}"}], ",", 
+     RowBox[{"-", "0.5"}], ",", "1.5", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"v2", ",", "1.5", ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<v\>\"", ",", "Italic"}], "]"}], ",", "\"\<right\>\""}],
+         "]"}]}], "}"}], ",", 
+     RowBox[{"-", "0.5"}], ",", "1.5", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"w1", ",", 
+       RowBox[{"-", "0.5"}], ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<w\>\"", ",", "Italic"}], "]"}], ",", "\"\<left\>\""}], 
+        "]"}]}], "}"}], ",", 
+     RowBox[{"-", "0.5"}], ",", "1.5", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"w2", ",", "1.5", ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<w\>\"", ",", "Italic"}], "]"}], ",", "\"\<right\>\""}],
+         "]"}]}], "}"}], ",", 
+     RowBox[{"-", "0.5"}], ",", "1.5", ",", ".01", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p", ",", 
+       RowBox[{"{", 
+        RowBox[{"0.4", ",", "0.5"}], "}"}], ",", 
+       RowBox[{"Style", "[", 
+        RowBox[{"\"\<p\>\"", ",", "Italic"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "sol", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"sol", " ", "=", " ", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"\[Epsilon]", " ", 
+               RowBox[{
+                RowBox[{"v", "'"}], "[", "t", "]"}]}], "==", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"v", "[", "t", "]"}], 
+                RowBox[{"(", 
+                 RowBox[{"1", "-", 
+                  RowBox[{"v", "[", "t", "]"}]}], ")"}], 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"v", "[", "t", "]"}], "-", "\[Alpha]"}], ")"}]}], 
+               "-", 
+               RowBox[{"w", "[", "t", "]"}], "+", "Iapp"}]}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"w", "'"}], "[", "t", "]"}], " ", "\[Equal]", 
+              RowBox[{
+               RowBox[{"v", "[", "t", "]"}], "-", 
+               RowBox[{"\[Gamma]", " ", 
+                RowBox[{"w", "[", "t", "]"}]}]}]}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"v", "[", "0", "]"}], "\[Equal]", "v0"}], ",", 
+             RowBox[{
+              RowBox[{"w", "[", "0", "]"}], "\[Equal]", "w0"}]}], "}"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"v0", "\[Rule]", " ", 
+              RowBox[{"p", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+             RowBox[{"w0", "\[Rule]", " ", 
+              RowBox[{"p", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"v", ",", "w"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "10"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Show", "[", 
+        RowBox[{
+         RowBox[{"Plot", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Evaluate", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"v", "[", "t", "]"}], ",", 
+                 RowBox[{"w", "[", "t", "]"}]}], "}"}], "/.", "sol"}], "]"}], 
+             ",", "\[Alpha]"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"t", ",", "0", ",", "10"}], "}"}], ",", 
+           RowBox[{"PlotRange", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"-", "0.5"}], ",", "10"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"v1", ",", "v2"}], "}"}]}], "}"}]}], ",", 
+           RowBox[{"PlotLegends", "\[Rule]", 
+            RowBox[{"Placed", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"v", ",", "w"}], "}"}], ",", "Above"}], "]"}]}], ",", 
+           RowBox[{"ImageSize", "\[Rule]", " ", "220"}], ",", 
+           RowBox[{"PlotStyle", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CMYKColor", "[", 
+               RowBox[{"1", ",", "1", ",", "0.5"}], "]"}], ",", 
+              RowBox[{"CMYKColor", "[", 
+               RowBox[{"0.0", ",", "1", ",", "1"}], "]"}], ",", "Dashed"}], 
+             "}"}]}], ",", 
+           RowBox[{"Epilog", "\[Rule]", 
+            RowBox[{"Inset", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<\[Alpha]\>\"", ",", "12"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"-", "0.2"}], ",", "\[Alpha]"}], "}"}]}], "]"}]}]}], 
+          "]"}], ",", 
+         RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+         RowBox[{"FrameLabel", "\[Rule]", 
+          RowBox[{"{", "\"\<time (ms)\>\"", "}"}]}]}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", "\[Rule]", " ", "Left"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.74474224341311*^9, 3.744742247169581*^9}, {
+   3.744742288875991*^9, 3.744742379437731*^9}, {3.74474241957071*^9, 
+   3.744742455580508*^9}, {3.7447425567889233`*^9, 3.744742589821363*^9}, {
+   3.744742630991969*^9, 3.744742656904408*^9}, {3.744742690226639*^9, 
+   3.744742724255199*^9}, {3.744742759614929*^9, 3.744742778043605*^9}, {
+   3.7447428656847143`*^9, 3.744742930336999*^9}, {3.744744215335376*^9, 
+   3.7447442271140347`*^9}, {3.744744266788752*^9, 3.7447442829659643`*^9}, {
+   3.744744424754058*^9, 3.744744551833219*^9}, {3.744744833100729*^9, 
+   3.74474487085378*^9}, {3.7447449440492487`*^9, 3.7447449608437033`*^9}, {
+   3.7447450003223143`*^9, 3.7447451938160267`*^9}, 3.744745234788129*^9, {
+   3.7447728899132557`*^9, 3.744772890423257*^9}, {3.744773258013672*^9, 
+   3.744773397691388*^9}, 3.744773441994587*^9, {3.7448011231264877`*^9, 
+   3.744801205959853*^9}, {3.744801445365356*^9, 3.744801466220813*^9}, {
+   3.74480150692422*^9, 3.7448015097374287`*^9}, {3.744801611902671*^9, 
+   3.744801613052433*^9}, {3.7448016563477783`*^9, 3.744801657368607*^9}, {
+   3.744801692755748*^9, 3.744801698364727*^9}, {3.744820186044838*^9, 
+   3.7448201981470003`*^9}, {3.753547264764641*^9, 3.753547300415254*^9}, {
+   3.7535626602941837`*^9, 3.7535626662438717`*^9}, {3.7535626966162357`*^9, 
+   3.753562698274705*^9}, {3.7535627428176928`*^9, 3.753562748699395*^9}, {
+   3.753562806630157*^9, 3.753562829424453*^9}, {3.753562897118372*^9, 
+   3.753562924221333*^9}, {3.753562963496327*^9, 3.753563031957027*^9}, {
+   3.753563120677573*^9, 3.753563167793412*^9}, {3.753563198115274*^9, 
+   3.753563307649207*^9}, {3.753563395149707*^9, 3.753563432558072*^9}, {
+   3.7535634675460253`*^9, 3.753563484353621*^9}, {3.7535635495285597`*^9, 
+   3.753563571982408*^9}, {3.7535636203282547`*^9, 3.7535636211257772`*^9}, {
+   3.753563681644724*^9, 3.75356368304808*^9}, {3.753563728524531*^9, 
+   3.753563728690592*^9}, {3.75356376009332*^9, 3.753563766907058*^9}, {
+   3.753563799672472*^9, 3.753563817202242*^9}, 3.7535638757019043`*^9, {
+   3.753564135972164*^9, 3.753564233603565*^9}, {3.7535645719884663`*^9, 
+   3.75356459309094*^9}, {3.7535646367337*^9, 3.753564840288476*^9}, {
+   3.753564873040962*^9, 3.75356489807416*^9}, {3.753564938045733*^9, 
+   3.753565046320407*^9}, {3.753572093069941*^9, 3.753572093851997*^9}, {
+   3.75357213846139*^9, 3.7535721391540413`*^9}, {3.75357224684081*^9, 
+   3.753572247959178*^9}, {3.753572631283445*^9, 3.753572637468318*^9}, {
+   3.753572725797653*^9, 3.7535727409047956`*^9}, {3.753572804787116*^9, 
+   3.7535728347498913`*^9}, {3.7535728677123947`*^9, 3.753572920622733*^9}, {
+   3.753572970486178*^9, 3.753572986167251*^9}, {3.7535731778433743`*^9, 
+   3.753573268601777*^9}, {3.753573311231702*^9, 3.753573430923263*^9}, {
+   3.753573477222416*^9, 3.753573517091057*^9}, {3.7535735939333963`*^9, 
+   3.753573624062418*^9}, {3.7535736612918053`*^9, 3.753573695478842*^9}, {
+   3.7535737349253063`*^9, 3.753573747245913*^9}, {3.7535875441446037`*^9, 
+   3.7535875494458714`*^9}, {3.753626241300378*^9, 3.75362624478861*^9}, {
+   3.753626284637639*^9, 3.753626329774568*^9}, {3.753626407643002*^9, 
+   3.7536264192645483`*^9}, {3.7536265122106237`*^9, 3.7536265454988317`*^9}, 
+   3.753626579209116*^9, {3.753627209553752*^9, 3.7536272266638947`*^9}, {
+   3.753627267651382*^9, 3.753627285368587*^9}, 3.753627512706699*^9, {
+   3.753627708652445*^9, 3.7536277873508253`*^9}, {3.7536279200344954`*^9, 
+   3.753627922091839*^9}, {3.753627962294004*^9, 3.753628042587031*^9}, {
+   3.75362828006187*^9, 3.7536282837957363`*^9}, {3.753628333886815*^9, 
+   3.753628335964872*^9}, {3.7536285199550962`*^9, 3.753628525295999*^9}, 
+   3.75659610562628*^9, {3.759095695618927*^9, 3.75909579457514*^9}, {
+   3.759095889655546*^9, 3.7590958927571583`*^9}, {3.759095962956176*^9, 
+   3.759096011587701*^9}, 3.759096063474021*^9, {3.759096168519568*^9, 
+   3.7590961918720007`*^9}, {3.759096326798387*^9, 3.759096339715807*^9}, {
+   3.759096401667478*^9, 3.7590964268499937`*^9}, {3.759096549991946*^9, 
+   3.759096555628975*^9}, {3.759096729780154*^9, 3.759096730058303*^9}, {
+   3.7590973602341757`*^9, 3.7590974405004473`*^9}, {3.7590974957001762`*^9, 
+   3.759097500010784*^9}, {3.759097570234955*^9, 3.759097604848588*^9}, {
+   3.759097676089202*^9, 3.759097682561528*^9}, {3.759097793106338*^9, 
+   3.759097798307757*^9}, {3.759097828382032*^9, 3.75909786772292*^9}, {
+   3.759097904755246*^9, 3.759097920105721*^9}, {3.75915451499728*^9, 
+   3.7591545261010156`*^9}, {3.759154571860733*^9, 3.7591545723138285`*^9}, {
+   3.759238257097484*^9, 3.7592383786572847`*^9}, {3.759238544803893*^9, 
+   3.759238550911233*^9}, {3.759238623680635*^9, 3.759238636921921*^9}, {
+   3.759238683510915*^9, 3.759238697572755*^9}, {3.759238943012311*^9, 
+   3.759238999251637*^9}, {3.759239052546472*^9, 3.759239095498776*^9}, 
+   3.7592397378552313`*^9, {3.759239880037539*^9, 3.7592399226201468`*^9}, {
+   3.759240195498678*^9, 3.759240228101942*^9}, {3.759240288336219*^9, 
+   3.759240298775909*^9}, 3.760899611814912*^9, {3.761318247441411*^9, 
+   3.761318295930685*^9}},
+ CellID->14903349,
+ ExpressionUUID -> "0c4b3831-3e41-4b58-9993-babe739ff646"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Iapp$$ = 0.5, $CellContext`p$$ = {0.4, 
+    0.5}, $CellContext`v1$$ = -0.5, $CellContext`v2$$ = 
+    1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+    1.5, $CellContext`\[Alpha]$$ = 0.1, $CellContext`\[Gamma]$$ = 
+    0.5, $CellContext`\[Epsilon]$$ = 0.01, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["model parameters", 12]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Epsilon]$$], 0.01, "\[Epsilon]"}, 0.001, 1, 
+      0.01}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.5, "\[Gamma]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`\[Alpha]$$], 0.1, "\[Alpha]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`Iapp$$], 0.5, 
+       Subscript[
+        Style["I", Italic], "app"]}, 0., 1, 0.01}, {
+      Hold[
+       Style[
+        Row[{
+          Style["v", Italic], " and ", 
+          Style["w", Italic], " ranges"}], 12]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`v1$$], -0.5, 
+       Subscript[
+        Style["v", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`v2$$], 1.5, 
+       Subscript[
+        Style["v", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w1$$], -0.5, 
+       Subscript[
+        Style["w", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w2$$], 1.5, 
+       Subscript[
+        Style["w", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`p$$], {0.4, 0.5}, 
+       Style["p", Italic]}, {-1, -1}, {2, 2}}, {
+      Hold[
+       Dynamic[
+        Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+            
+            ReplaceAll[{$CellContext`\[Epsilon]$$ 
+               Derivative[
+                1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                  1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+              Derivative[
+               1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+               0] == $CellContext`v0, $CellContext`w[
+               0] == $CellContext`w0}, {$CellContext`v0 -> 
+              Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+              Part[$CellContext`p$$, 
+                2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+             10}]; Show[
+           Plot[{
+             Evaluate[
+              ReplaceAll[{
+                $CellContext`v[$CellContext`t], 
+                $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+            PlotRange -> {{-0.5, 10}, {$CellContext`v1$$, $CellContext`v2$$}},
+             PlotLegends -> Placed[{$CellContext`v, $CellContext`w}, Above], 
+            ImageSize -> 220, PlotStyle -> {
+              CMYKColor[1, 1, 0.5], 
+              CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+              Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], Frame -> 
+           True, FrameLabel -> {"time (ms)"}]]]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    360., {177., 222.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Epsilon]$1248246$$ = 
+    0, $CellContext`\[Gamma]$1248247$$ = 0, $CellContext`\[Alpha]$1248248$$ = 
+    0, $CellContext`Iapp$1248249$$ = 0, $CellContext`v1$1248250$$ = 
+    0, $CellContext`v2$1248251$$ = 0, $CellContext`w1$1248252$$ = 
+    0, $CellContext`w2$1248253$$ = 0, $CellContext`p$1248254$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Iapp$$ = 
+        0.5, $CellContext`p$$ = {0.4, 
+         0.5}, $CellContext`v1$$ = -0.5, $CellContext`v2$$ = 
+        1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+        1.5, $CellContext`\[Alpha]$$ = 0.1, $CellContext`\[Gamma]$$ = 
+        0.5, $CellContext`\[Epsilon]$$ = 0.01}, "ControllerVariables" :> {
+        Hold[$CellContext`\[Epsilon]$$, $CellContext`\[Epsilon]$1248246$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$1248247$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$1248248$$, 0], 
+        Hold[$CellContext`Iapp$$, $CellContext`Iapp$1248249$$, 0], 
+        Hold[$CellContext`v1$$, $CellContext`v1$1248250$$, 0], 
+        Hold[$CellContext`v2$$, $CellContext`v2$1248251$$, 0], 
+        Hold[$CellContext`w1$$, $CellContext`w1$1248252$$, 0], 
+        Hold[$CellContext`w2$$, $CellContext`w2$1248253$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$1248254$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+           
+           ReplaceAll[{$CellContext`\[Epsilon]$$ 
+              Derivative[
+               1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                 1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+             Derivative[
+              1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+              0] == $CellContext`v0, $CellContext`w[
+              0] == $CellContext`w0}, {$CellContext`v0 -> 
+             Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+             Part[$CellContext`p$$, 
+               2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+            10}]; Show[
+          
+          ContourPlot[{($CellContext`v (
+                1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$ == 
+            0, $CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w == 
+            0, $CellContext`v == $CellContext`\[Alpha]$$}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, Axes -> True, PlotLegends -> Placed[{
+              Row[{Style["dv", Italic]/Style["dt", Italic], " = 0"}], 
+              Row[{Style["dw", Italic]/Style["dt", Italic], " = 0"}]}, Above],
+            AxesLabel -> {
+             Style["v", FontSize -> 18, Italic, Black], 
+             Style["w", FontSize -> 18, Italic, Black]}, ContourStyle -> {{
+              Thickness[0.008], 
+              CMYKColor[0, 0.5, 1]}, {
+              Thickness[0.008], 
+              CMYKColor[1, 0.25, 0.5]}, Dashed}, Epilog -> Inset[
+             Style[
+             "\[Alpha]", 18, Black], {$CellContext`\[Alpha]$$ + 
+              0.05, -0.05}]], 
+          
+          VectorPlot[{($CellContext`v (
+               1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$, \
+$CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, VectorStyle -> {Gray, "PinDart"}], 
+          ParametricPlot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`v[$CellContext`t], 
+              $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+{$CellContext`t, 0, 10}, PlotStyle -> Directive[
+             CMYKColor[0.5, 1, 0.5]]]]], "Specifications" :> {
+        Style[
+        "model parameters", 
+         12], {{$CellContext`\[Epsilon]$$, 0.01, "\[Epsilon]"}, 0.001, 1, 
+         0.01, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Gamma]$$, 0.5, "\[Gamma]"}, 0., 1, 0.01,
+          ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Alpha]$$, 0.1, "\[Alpha]"}, 0., 1, 0.01,
+          ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`Iapp$$, 0.5, 
+          Subscript[
+           Style["I", Italic], "app"]}, 0., 1, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, Delimiter, 
+        Style[
+         Row[{
+           Style["v", Italic], " and ", 
+           Style["w", Italic], " ranges"}], 12], {{$CellContext`v1$$, -0.5, 
+          Subscript[
+           Style["v", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`v2$$, 1.5, 
+          Subscript[
+           Style["v", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w1$$, -0.5, 
+          Subscript[
+           Style["w", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w2$$, 1.5, 
+          Subscript[
+           Style["w", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`p$$, {0.4, 0.5}, 
+          Style["p", Italic]}, {-1, -1}, {2, 2}}, 
+        Dynamic[
+         Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+             
+             ReplaceAll[{$CellContext`\[Epsilon]$$ 
+                Derivative[
+                 1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                   1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+               Derivative[
+                1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+                0] == $CellContext`v0, $CellContext`w[
+                0] == $CellContext`w0}, {$CellContext`v0 -> 
+               Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+               Part[$CellContext`p$$, 
+                 2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+              10}]; Show[
+            Plot[{
+              Evaluate[
+               ReplaceAll[{
+                 $CellContext`v[$CellContext`t], 
+                 $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+             PlotRange -> {{-0.5, 
+                10}, {$CellContext`v1$$, $CellContext`v2$$}}, PlotLegends -> 
+             Placed[{$CellContext`v, $CellContext`w}, Above], ImageSize -> 
+             220, PlotStyle -> {
+               CMYKColor[1, 1, 0.5], 
+               CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+               Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], 
+            Frame -> True, FrameLabel -> {"time (ms)"}]]]}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{626., {247., 252.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->2038448170]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection",ExpressionUUID->"4812e496-bd75-47ee-a4da-06dfe04c4b19"],
+
+Cell[TextData[{
+ "This Demonstration shows the fast\[Dash]slow dynamics of the \
+FitzHugh\[Dash]Nagumo model of neuronal excitation. The main window shows the \
+trajectory in the phase plane of the fast excitation variable ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "77e52967-5264-4eeb-8d7e-00f22aebddb5"],
+ " and the slow recovery variable ",
+ Cell[BoxData[
+  FormBox["w", TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "2dce4342-aff2-4b1e-ac59-185aa8364afc"],
+ ", together with the corresponding nullclines."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.759098596837129*^9, 3.759098616958391*^9}, {
+   3.75909893070387*^9, 3.759098931335816*^9}, {3.759099004863268*^9, 
+   3.7590990923884687`*^9}, {3.759099126620821*^9, 3.75909931153104*^9}, {
+   3.7592392496749*^9, 3.759239252820538*^9}, {3.7592392938883*^9, 
+   3.75923929890411*^9}, {3.7592398058157473`*^9, 3.7592398109893847`*^9}, 
+   3.760899490485425*^9, {3.7608997054767714`*^9, 3.7608997156272573`*^9}, {
+   3.760899937755674*^9, 3.760899944624505*^9}, 3.761585446567936*^9, 
+   3.7615856799238787`*^9},
+ ExpressionUUID -> "c70deedc-7bec-4d6b-ba7e-063b43ad49b6"],
+
+Cell[TextData[{
+ "The smaller graphic on the left shows the time evolution of ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "5f15681c-19fa-4d75-b1ea-c75e6ab2a10b"],
+ " and ",
+ Cell[BoxData[
+  FormBox["w", TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "8c520b90-5626-49e6-a1b9-6f83c3918e61"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.759098596837129*^9, 3.759098616958391*^9}, {
+  3.75909893070387*^9, 3.759098931335816*^9}, {3.759099004863268*^9, 
+  3.7590990923884687`*^9}, {3.759099126620821*^9, 3.759099335031288*^9}, {
+  3.759239262802346*^9, 3.759239285062881*^9}, {3.759239793506501*^9, 
+  3.7592397987603292`*^9}},
+ CellID->817168592,
+ ExpressionUUID -> "2d6f428f-3f40-4a9b-9e16-afd4d8462a22"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection",ExpressionUUID->"4daee059-707d-4e41-b7e1-8da2a5eeccb4"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Iapp$$ = 0.5, $CellContext`p$$ = {0.4, 
+    0.5}, $CellContext`v1$$ = -0.5, $CellContext`v2$$ = 
+    1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+    1.5, $CellContext`\[Alpha]$$ = 0.1, $CellContext`\[Gamma]$$ = 
+    0.5, $CellContext`\[Epsilon]$$ = 0.01, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["model parameters", 12]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Epsilon]$$], 0.01, "\[Epsilon]"}, 0.001, 1, 
+      0.01}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.5, "\[Gamma]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`\[Alpha]$$], 0.1, "\[Alpha]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`Iapp$$], 0.5, 
+       Subscript[
+        Style["I", Italic], "app"]}, 0., 1, 0.01}, {
+      Hold[
+       Style[
+        Row[{
+          Style["v", Italic], " and ", 
+          Style["w", Italic], " ranges"}], 12]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`v1$$], -0.5, 
+       Subscript[
+        Style["v", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`v2$$], 1.5, 
+       Subscript[
+        Style["v", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w1$$], -0.5, 
+       Subscript[
+        Style["w", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w2$$], 1.5, 
+       Subscript[
+        Style["w", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`p$$], {0.4, 0.5}, 
+       Style["p", Italic]}, {-1, -1}, {2, 2}}, {
+      Hold[
+       Dynamic[
+        Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+            
+            ReplaceAll[{$CellContext`\[Epsilon]$$ 
+               Derivative[
+                1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                  1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+              Derivative[
+               1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+               0] == $CellContext`v0, $CellContext`w[
+               0] == $CellContext`w0}, {$CellContext`v0 -> 
+              Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+              Part[$CellContext`p$$, 
+                2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+             10}]; Show[
+           Plot[{
+             Evaluate[
+              ReplaceAll[{
+                $CellContext`v[$CellContext`t], 
+                $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+            PlotRange -> {{-0.5, 10}, {$CellContext`v1$$, $CellContext`v2$$}},
+             PlotLegends -> Placed[{$CellContext`v, $CellContext`w}, Above], 
+            ImageSize -> 220, PlotStyle -> {
+              CMYKColor[1, 1, 0.5], 
+              CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+              Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], Frame -> 
+           True, FrameLabel -> {"time (ms)"}]]]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    360., {177., 222.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Epsilon]$1248350$$ = 
+    0, $CellContext`\[Gamma]$1248351$$ = 0, $CellContext`\[Alpha]$1248352$$ = 
+    0, $CellContext`Iapp$1248353$$ = 0, $CellContext`v1$1248354$$ = 
+    0, $CellContext`v2$1248355$$ = 0, $CellContext`w1$1248356$$ = 
+    0, $CellContext`w2$1248357$$ = 0, $CellContext`p$1248358$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Iapp$$ = 
+        0.5, $CellContext`p$$ = {0.4, 
+         0.5}, $CellContext`v1$$ = -0.5, $CellContext`v2$$ = 
+        1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+        1.5, $CellContext`\[Alpha]$$ = 0.1, $CellContext`\[Gamma]$$ = 
+        0.5, $CellContext`\[Epsilon]$$ = 0.01}, "ControllerVariables" :> {
+        Hold[$CellContext`\[Epsilon]$$, $CellContext`\[Epsilon]$1248350$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$1248351$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$1248352$$, 0], 
+        Hold[$CellContext`Iapp$$, $CellContext`Iapp$1248353$$, 0], 
+        Hold[$CellContext`v1$$, $CellContext`v1$1248354$$, 0], 
+        Hold[$CellContext`v2$$, $CellContext`v2$1248355$$, 0], 
+        Hold[$CellContext`w1$$, $CellContext`w1$1248356$$, 0], 
+        Hold[$CellContext`w2$$, $CellContext`w2$1248357$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$1248358$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+           
+           ReplaceAll[{$CellContext`\[Epsilon]$$ 
+              Derivative[
+               1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                 1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+             Derivative[
+              1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+              0] == $CellContext`v0, $CellContext`w[
+              0] == $CellContext`w0}, {$CellContext`v0 -> 
+             Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+             Part[$CellContext`p$$, 
+               2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+            10}]; Show[
+          
+          ContourPlot[{($CellContext`v (
+                1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$ == 
+            0, $CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w == 
+            0, $CellContext`v == $CellContext`\[Alpha]$$}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, Axes -> True, PlotLegends -> Placed[{
+              Row[{Style["dv", Italic]/Style["dt", Italic], " = 0"}], 
+              Row[{Style["dw", Italic]/Style["dt", Italic], " = 0"}]}, Above],
+            AxesLabel -> {
+             Style["v", FontSize -> 18, Italic, Black], 
+             Style["w", FontSize -> 18, Italic, Black]}, ContourStyle -> {{
+              Thickness[0.008], 
+              CMYKColor[0, 0.5, 1]}, {
+              Thickness[0.008], 
+              CMYKColor[1, 0.25, 0.5]}, Dashed}, Epilog -> Inset[
+             Style[
+             "\[Alpha]", 18, Black], {$CellContext`\[Alpha]$$ + 
+              0.05, -0.05}]], 
+          
+          VectorPlot[{($CellContext`v (
+               1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$, \
+$CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, VectorStyle -> {Gray, "PinDart"}], 
+          ParametricPlot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`v[$CellContext`t], 
+              $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+{$CellContext`t, 0, 10}, PlotStyle -> Directive[
+             CMYKColor[0.5, 1, 0.5]]]]], "Specifications" :> {
+        Style[
+        "model parameters", 
+         12], {{$CellContext`\[Epsilon]$$, 0.01, "\[Epsilon]"}, 0.001, 1, 
+         0.01, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Gamma]$$, 0.5, "\[Gamma]"}, 0., 1, 0.01,
+          ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Alpha]$$, 0.1, "\[Alpha]"}, 0., 1, 0.01,
+          ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`Iapp$$, 0.5, 
+          Subscript[
+           Style["I", Italic], "app"]}, 0., 1, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, Delimiter, 
+        Style[
+         Row[{
+           Style["v", Italic], " and ", 
+           Style["w", Italic], " ranges"}], 12], {{$CellContext`v1$$, -0.5, 
+          Subscript[
+           Style["v", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`v2$$, 1.5, 
+          Subscript[
+           Style["v", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w1$$, -0.5, 
+          Subscript[
+           Style["w", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w2$$, 1.5, 
+          Subscript[
+           Style["w", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`p$$, {0.4, 0.5}, 
+          Style["p", Italic]}, {-1, -1}, {2, 2}}, 
+        Dynamic[
+         Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+             
+             ReplaceAll[{$CellContext`\[Epsilon]$$ 
+                Derivative[
+                 1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                   1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+               Derivative[
+                1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+                0] == $CellContext`v0, $CellContext`w[
+                0] == $CellContext`w0}, {$CellContext`v0 -> 
+               Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+               Part[$CellContext`p$$, 
+                 2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+              10}]; Show[
+            Plot[{
+              Evaluate[
+               ReplaceAll[{
+                 $CellContext`v[$CellContext`t], 
+                 $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+             PlotRange -> {{-0.5, 
+                10}, {$CellContext`v1$$, $CellContext`v2$$}}, PlotLegends -> 
+             Placed[{$CellContext`v, $CellContext`w}, Above], ImageSize -> 
+             220, PlotStyle -> {
+               CMYKColor[1, 1, 0.5], 
+               CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+               Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], 
+            Frame -> True, FrameLabel -> {"time (ms)"}]]]}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{626., {247., 252.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1391772599]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection",ExpressionUUID->"320636b8-6931-4ce1-8ba4-d64e6d161445"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Iapp$$ = 0., $CellContext`p$$ = {
+    0.6420000000000001, -0.030000000000000027`}, $CellContext`v1$$ = -0.5, \
+$CellContext`v2$$ = 1.5, $CellContext`w1$$ = -0.24, $CellContext`w2$$ = 
+    0.27, $CellContext`\[Alpha]$$ = 1., $CellContext`\[Gamma]$$ = 
+    1., $CellContext`\[Epsilon]$$ = 0.01, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["model parameters", 12]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Epsilon]$$], 0.01, "\[Epsilon]"}, 0.001, 1, 
+      0.01}, {{
+       Hold[$CellContext`\[Gamma]$$], 1., "\[Gamma]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`\[Alpha]$$], 1., "\[Alpha]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`Iapp$$], 0., 
+       Subscript[
+        Style["I", Italic], "app"]}, 0., 1, 0.01}, {
+      Hold[
+       Style[
+        Row[{
+          Style["v", Italic], " and ", 
+          Style["w", Italic], " ranges"}], 12]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`v1$$], -0.5, 
+       Subscript[
+        Style["v", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`v2$$], 1.5, 
+       Subscript[
+        Style["v", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w1$$], -0.24, 
+       Subscript[
+        Style["w", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w2$$], 0.27, 
+       Subscript[
+        Style["w", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`p$$], {0.6420000000000001, -0.030000000000000027`}, 
+       Style["p", Italic]}, {-1, -1}, {2, 2}}, {
+      Hold[
+       Dynamic[
+        Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+            
+            ReplaceAll[{$CellContext`\[Epsilon]$$ 
+               Derivative[
+                1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                  1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+              Derivative[
+               1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+               0] == $CellContext`v0, $CellContext`w[
+               0] == $CellContext`w0}, {$CellContext`v0 -> 
+              Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+              Part[$CellContext`p$$, 
+                2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+             10}]; Show[
+           Plot[{
+             Evaluate[
+              ReplaceAll[{
+                $CellContext`v[$CellContext`t], 
+                $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+            PlotRange -> {{-0.5, 10}, {$CellContext`v1$$, $CellContext`v2$$}},
+             PlotLegends -> Placed[{$CellContext`v, $CellContext`w}, Above], 
+            ImageSize -> 220, PlotStyle -> {
+              CMYKColor[1, 1, 0.5], 
+              CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+              Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], Frame -> 
+           True, FrameLabel -> {"time (ms)"}]]]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    360., {177., 222.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Epsilon]$1248454$$ = 
+    0, $CellContext`\[Gamma]$1248455$$ = 0, $CellContext`\[Alpha]$1248456$$ = 
+    0, $CellContext`Iapp$1248457$$ = 0, $CellContext`v1$1248458$$ = 
+    0, $CellContext`v2$1248459$$ = 0, $CellContext`w1$1248460$$ = 
+    0, $CellContext`w2$1248461$$ = 0, $CellContext`p$1248462$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Iapp$$ = 
+        0., $CellContext`p$$ = {
+         0.6420000000000001, -0.030000000000000027`}, $CellContext`v1$$ = \
+-0.5, $CellContext`v2$$ = 1.5, $CellContext`w1$$ = -0.24, $CellContext`w2$$ = 
+        0.27, $CellContext`\[Alpha]$$ = 1., $CellContext`\[Gamma]$$ = 
+        1., $CellContext`\[Epsilon]$$ = 0.01}, "ControllerVariables" :> {
+        Hold[$CellContext`\[Epsilon]$$, $CellContext`\[Epsilon]$1248454$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$1248455$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$1248456$$, 0], 
+        Hold[$CellContext`Iapp$$, $CellContext`Iapp$1248457$$, 0], 
+        Hold[$CellContext`v1$$, $CellContext`v1$1248458$$, 0], 
+        Hold[$CellContext`v2$$, $CellContext`v2$1248459$$, 0], 
+        Hold[$CellContext`w1$$, $CellContext`w1$1248460$$, 0], 
+        Hold[$CellContext`w2$$, $CellContext`w2$1248461$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$1248462$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+           
+           ReplaceAll[{$CellContext`\[Epsilon]$$ 
+              Derivative[
+               1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                 1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+             Derivative[
+              1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+              0] == $CellContext`v0, $CellContext`w[
+              0] == $CellContext`w0}, {$CellContext`v0 -> 
+             Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+             Part[$CellContext`p$$, 
+               2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+            10}]; Show[
+          
+          ContourPlot[{($CellContext`v (
+                1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$ == 
+            0, $CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w == 
+            0, $CellContext`v == $CellContext`\[Alpha]$$}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, Axes -> True, PlotLegends -> Placed[{
+              Row[{Style["dv", Italic]/Style["dt", Italic], " = 0"}], 
+              Row[{Style["dw", Italic]/Style["dt", Italic], " = 0"}]}, Above],
+            AxesLabel -> {
+             Style["v", FontSize -> 18, Italic, Black], 
+             Style["w", FontSize -> 18, Italic, Black]}, ContourStyle -> {{
+              Thickness[0.008], 
+              CMYKColor[0, 0.5, 1]}, {
+              Thickness[0.008], 
+              CMYKColor[1, 0.25, 0.5]}, Dashed}, Epilog -> Inset[
+             Style[
+             "\[Alpha]", 18, Black], {$CellContext`\[Alpha]$$ + 
+              0.05, -0.05}]], 
+          
+          VectorPlot[{($CellContext`v (
+               1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$, \
+$CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, VectorStyle -> {Gray, "PinDart"}], 
+          ParametricPlot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`v[$CellContext`t], 
+              $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+{$CellContext`t, 0, 10}, PlotStyle -> Directive[
+             CMYKColor[0.5, 1, 0.5]]]]], "Specifications" :> {
+        Style[
+        "model parameters", 
+         12], {{$CellContext`\[Epsilon]$$, 0.01, "\[Epsilon]"}, 0.001, 1, 
+         0.01, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Gamma]$$, 1., "\[Gamma]"}, 0., 1, 0.01, 
+         ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Alpha]$$, 1., "\[Alpha]"}, 0., 1, 0.01, 
+         ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`Iapp$$, 0., 
+          Subscript[
+           Style["I", Italic], "app"]}, 0., 1, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, Delimiter, 
+        Style[
+         Row[{
+           Style["v", Italic], " and ", 
+           Style["w", Italic], " ranges"}], 12], {{$CellContext`v1$$, -0.5, 
+          Subscript[
+           Style["v", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`v2$$, 1.5, 
+          Subscript[
+           Style["v", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w1$$, -0.24, 
+          Subscript[
+           Style["w", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w2$$, 0.27, 
+          Subscript[
+           Style["w", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`p$$, {
+          0.6420000000000001, -0.030000000000000027`}, 
+          Style["p", Italic]}, {-1, -1}, {2, 2}}, 
+        Dynamic[
+         Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+             
+             ReplaceAll[{$CellContext`\[Epsilon]$$ 
+                Derivative[
+                 1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                   1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+               Derivative[
+                1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+                0] == $CellContext`v0, $CellContext`w[
+                0] == $CellContext`w0}, {$CellContext`v0 -> 
+               Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+               Part[$CellContext`p$$, 
+                 2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+              10}]; Show[
+            Plot[{
+              Evaluate[
+               ReplaceAll[{
+                 $CellContext`v[$CellContext`t], 
+                 $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+             PlotRange -> {{-0.5, 
+                10}, {$CellContext`v1$$, $CellContext`v2$$}}, PlotLegends -> 
+             Placed[{$CellContext`v, $CellContext`w}, Above], ImageSize -> 
+             220, PlotStyle -> {
+               CMYKColor[1, 1, 0.5], 
+               CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+               Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], 
+            Frame -> True, FrameLabel -> {"time (ms)"}]]]}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{626., {247., 252.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1130188269],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Iapp$$ = 0., $CellContext`p$$ = {
+    0.5980000000000001, -0.24}, $CellContext`v1$$ = -0.5, $CellContext`v2$$ = 
+    1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+    0.6599999999999999, $CellContext`\[Alpha]$$ = 
+    1., $CellContext`\[Gamma]$$ = 1., $CellContext`\[Epsilon]$$ = 0.01, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["model parameters", 12]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Epsilon]$$], 0.01, "\[Epsilon]"}, 0.001, 1, 
+      0.01}, {{
+       Hold[$CellContext`\[Gamma]$$], 1., "\[Gamma]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`\[Alpha]$$], 1., "\[Alpha]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`Iapp$$], 0., 
+       Subscript[
+        Style["I", Italic], "app"]}, 0., 1, 0.01}, {
+      Hold[
+       Style[
+        Row[{
+          Style["v", Italic], " and ", 
+          Style["w", Italic], " ranges"}], 12]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`v1$$], -0.5, 
+       Subscript[
+        Style["v", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`v2$$], 1.5, 
+       Subscript[
+        Style["v", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w1$$], -0.5, 
+       Subscript[
+        Style["w", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w2$$], 0.6599999999999999, 
+       Subscript[
+        Style["w", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`p$$], {0.5980000000000001, -0.24}, 
+       Style["p", Italic]}, {-1, -1}, {2, 2}}, {
+      Hold[
+       Dynamic[
+        Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+            
+            ReplaceAll[{$CellContext`\[Epsilon]$$ 
+               Derivative[
+                1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                  1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+              Derivative[
+               1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+               0] == $CellContext`v0, $CellContext`w[
+               0] == $CellContext`w0}, {$CellContext`v0 -> 
+              Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+              Part[$CellContext`p$$, 
+                2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+             10}]; Show[
+           Plot[{
+             Evaluate[
+              ReplaceAll[{
+                $CellContext`v[$CellContext`t], 
+                $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+            PlotRange -> {{-0.5, 10}, {$CellContext`v1$$, $CellContext`v2$$}},
+             PlotLegends -> Placed[{$CellContext`v, $CellContext`w}, Above], 
+            ImageSize -> 220, PlotStyle -> {
+              CMYKColor[1, 1, 0.5], 
+              CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+              Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], Frame -> 
+           True, FrameLabel -> {"time (ms)"}]]]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    360., {177., 222.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Epsilon]$1248558$$ = 
+    0, $CellContext`\[Gamma]$1248559$$ = 0, $CellContext`\[Alpha]$1248560$$ = 
+    0, $CellContext`Iapp$1248561$$ = 0, $CellContext`v1$1248562$$ = 
+    0, $CellContext`v2$1248563$$ = 0, $CellContext`w1$1248564$$ = 
+    0, $CellContext`w2$1248565$$ = 0, $CellContext`p$1248566$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Iapp$$ = 
+        0., $CellContext`p$$ = {
+         0.5980000000000001, -0.24}, $CellContext`v1$$ = -0.5, \
+$CellContext`v2$$ = 1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+        0.6599999999999999, $CellContext`\[Alpha]$$ = 
+        1., $CellContext`\[Gamma]$$ = 1., $CellContext`\[Epsilon]$$ = 0.01}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`\[Epsilon]$$, $CellContext`\[Epsilon]$1248558$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$1248559$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$1248560$$, 0], 
+        Hold[$CellContext`Iapp$$, $CellContext`Iapp$1248561$$, 0], 
+        Hold[$CellContext`v1$$, $CellContext`v1$1248562$$, 0], 
+        Hold[$CellContext`v2$$, $CellContext`v2$1248563$$, 0], 
+        Hold[$CellContext`w1$$, $CellContext`w1$1248564$$, 0], 
+        Hold[$CellContext`w2$$, $CellContext`w2$1248565$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$1248566$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+           
+           ReplaceAll[{$CellContext`\[Epsilon]$$ 
+              Derivative[
+               1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                 1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+             Derivative[
+              1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+              0] == $CellContext`v0, $CellContext`w[
+              0] == $CellContext`w0}, {$CellContext`v0 -> 
+             Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+             Part[$CellContext`p$$, 
+               2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+            10}]; Show[
+          
+          ContourPlot[{($CellContext`v (
+                1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$ == 
+            0, $CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w == 
+            0, $CellContext`v == $CellContext`\[Alpha]$$}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, Axes -> True, PlotLegends -> Placed[{
+              Row[{Style["dv", Italic]/Style["dt", Italic], " = 0"}], 
+              Row[{Style["dw", Italic]/Style["dt", Italic], " = 0"}]}, Above],
+            AxesLabel -> {
+             Style["v", FontSize -> 18, Italic, Black], 
+             Style["w", FontSize -> 18, Italic, Black]}, ContourStyle -> {{
+              Thickness[0.008], 
+              CMYKColor[0, 0.5, 1]}, {
+              Thickness[0.008], 
+              CMYKColor[1, 0.25, 0.5]}, Dashed}, Epilog -> Inset[
+             Style[
+             "\[Alpha]", 18, Black], {$CellContext`\[Alpha]$$ + 
+              0.05, -0.05}]], 
+          
+          VectorPlot[{($CellContext`v (
+               1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$, \
+$CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, VectorStyle -> {Gray, "PinDart"}], 
+          ParametricPlot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`v[$CellContext`t], 
+              $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+{$CellContext`t, 0, 10}, PlotStyle -> Directive[
+             CMYKColor[0.5, 1, 0.5]]]]], "Specifications" :> {
+        Style[
+        "model parameters", 
+         12], {{$CellContext`\[Epsilon]$$, 0.01, "\[Epsilon]"}, 0.001, 1, 
+         0.01, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Gamma]$$, 1., "\[Gamma]"}, 0., 1, 0.01, 
+         ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Alpha]$$, 1., "\[Alpha]"}, 0., 1, 0.01, 
+         ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`Iapp$$, 0., 
+          Subscript[
+           Style["I", Italic], "app"]}, 0., 1, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, Delimiter, 
+        Style[
+         Row[{
+           Style["v", Italic], " and ", 
+           Style["w", Italic], " ranges"}], 12], {{$CellContext`v1$$, -0.5, 
+          Subscript[
+           Style["v", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`v2$$, 1.5, 
+          Subscript[
+           Style["v", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w1$$, -0.5, 
+          Subscript[
+           Style["w", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w2$$, 0.6599999999999999, 
+          Subscript[
+           Style["w", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`p$$, {0.5980000000000001, -0.24}, 
+          Style["p", Italic]}, {-1, -1}, {2, 2}}, 
+        Dynamic[
+         Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+             
+             ReplaceAll[{$CellContext`\[Epsilon]$$ 
+                Derivative[
+                 1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                   1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+               Derivative[
+                1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+                0] == $CellContext`v0, $CellContext`w[
+                0] == $CellContext`w0}, {$CellContext`v0 -> 
+               Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+               Part[$CellContext`p$$, 
+                 2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+              10}]; Show[
+            Plot[{
+              Evaluate[
+               ReplaceAll[{
+                 $CellContext`v[$CellContext`t], 
+                 $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+             PlotRange -> {{-0.5, 
+                10}, {$CellContext`v1$$, $CellContext`v2$$}}, PlotLegends -> 
+             Placed[{$CellContext`v, $CellContext`w}, Above], ImageSize -> 
+             220, PlotStyle -> {
+               CMYKColor[1, 1, 0.5], 
+               CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+               Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], 
+            Frame -> True, FrameLabel -> {"time (ms)"}]]]}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{626., {247., 252.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->581379368],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Iapp$$ = 0.5, $CellContext`p$$ = {0.562, 
+    0.17500000000000004`}, $CellContext`v1$$ = -0.5, $CellContext`v2$$ = 
+    1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+    1.5, $CellContext`\[Alpha]$$ = 0.1, $CellContext`\[Gamma]$$ = 
+    0.5, $CellContext`\[Epsilon]$$ = 0.01, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["model parameters", 12]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Epsilon]$$], 0.01, "\[Epsilon]"}, 0.001, 1, 
+      0.01}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.5, "\[Gamma]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`\[Alpha]$$], 0.1, "\[Alpha]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`Iapp$$], 0.5, 
+       Subscript[
+        Style["I", Italic], "app"]}, 0., 1, 0.01}, {
+      Hold[
+       Style[
+        Row[{
+          Style["v", Italic], " and ", 
+          Style["w", Italic], " ranges"}], 12]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`v1$$], -0.5, 
+       Subscript[
+        Style["v", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`v2$$], 1.5, 
+       Subscript[
+        Style["v", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w1$$], -0.5, 
+       Subscript[
+        Style["w", Italic], "left"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`w2$$], 1.5, 
+       Subscript[
+        Style["w", Italic], "right"]}, -0.5, 1.5, 0.01}, {{
+       Hold[$CellContext`p$$], {0.562, 0.17500000000000004`}, 
+       Style["p", Italic]}, {-1, -1}, {2, 2}}, {
+      Hold[
+       Dynamic[
+        Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+            
+            ReplaceAll[{$CellContext`\[Epsilon]$$ 
+               Derivative[
+                
+                1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                  1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+              Derivative[
+               1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+               0] == $CellContext`v0, $CellContext`w[
+               0] == $CellContext`w0}, {$CellContext`v0 -> 
+              Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+              Part[$CellContext`p$$, 
+                2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+             10}]; Show[
+           Plot[{
+             Evaluate[
+              ReplaceAll[{
+                $CellContext`v[$CellContext`t], 
+                $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+            PlotRange -> {{-0.5, 10}, {$CellContext`v1$$, $CellContext`v2$$}},
+             PlotLegends -> Placed[{$CellContext`v, $CellContext`w}, Above], 
+            ImageSize -> 220, PlotStyle -> {
+              CMYKColor[1, 1, 0.5], 
+              CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+              Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], Frame -> 
+           True, FrameLabel -> {"time (ms)"}]]]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    360., {177., 222.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Epsilon]$1248662$$ = 
+    0, $CellContext`\[Gamma]$1248663$$ = 0, $CellContext`\[Alpha]$1248664$$ = 
+    0, $CellContext`Iapp$1248665$$ = 0, $CellContext`v1$1248666$$ = 
+    0, $CellContext`v2$1248667$$ = 0, $CellContext`w1$1248668$$ = 
+    0, $CellContext`w2$1248669$$ = 0, $CellContext`p$1248670$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Iapp$$ = 
+        0.5, $CellContext`p$$ = {0.562, 
+         0.17500000000000004`}, $CellContext`v1$$ = -0.5, $CellContext`v2$$ = 
+        1.5, $CellContext`w1$$ = -0.5, $CellContext`w2$$ = 
+        1.5, $CellContext`\[Alpha]$$ = 0.1, $CellContext`\[Gamma]$$ = 
+        0.5, $CellContext`\[Epsilon]$$ = 0.01}, "ControllerVariables" :> {
+        Hold[$CellContext`\[Epsilon]$$, $CellContext`\[Epsilon]$1248662$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$1248663$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$1248664$$, 0], 
+        Hold[$CellContext`Iapp$$, $CellContext`Iapp$1248665$$, 0], 
+        Hold[$CellContext`v1$$, $CellContext`v1$1248666$$, 0], 
+        Hold[$CellContext`v2$$, $CellContext`v2$1248667$$, 0], 
+        Hold[$CellContext`w1$$, $CellContext`w1$1248668$$, 0], 
+        Hold[$CellContext`w2$$, $CellContext`w2$1248669$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$1248670$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+           
+           ReplaceAll[{$CellContext`\[Epsilon]$$ 
+              Derivative[
+               1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                 1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+             Derivative[
+              1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+              0] == $CellContext`v0, $CellContext`w[
+              0] == $CellContext`w0}, {$CellContext`v0 -> 
+             Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+             Part[$CellContext`p$$, 
+               2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+            10}]; Show[
+          
+          ContourPlot[{($CellContext`v (
+                1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$ == 
+            0, $CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w == 
+            0, $CellContext`v == $CellContext`\[Alpha]$$}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, Axes -> True, PlotLegends -> Placed[{
+              Row[{Style["dv", Italic]/Style["dt", Italic], " = 0"}], 
+              Row[{Style["dw", Italic]/Style["dt", Italic], " = 0"}]}, Above],
+            AxesLabel -> {
+             Style["v", FontSize -> 18, Italic, Black], 
+             Style["w", FontSize -> 18, Italic, Black]}, ContourStyle -> {{
+              Thickness[0.008], 
+              CMYKColor[0, 0.5, 1]}, {
+              Thickness[0.008], 
+              CMYKColor[1, 0.25, 0.5]}, Dashed}, Epilog -> Inset[
+             Style[
+             "\[Alpha]", 18, Black], {$CellContext`\[Alpha]$$ + 
+              0.05, -0.05}]], 
+          
+          VectorPlot[{($CellContext`v (
+               1 - $CellContext`v)) ($CellContext`v - \
+$CellContext`\[Alpha]$$) - $CellContext`w + $CellContext`Iapp$$, \
+$CellContext`v - $CellContext`\[Gamma]$$ $CellContext`w}, {$CellContext`v, \
+$CellContext`v1$$, $CellContext`v2$$}, {$CellContext`w, $CellContext`w1$$, \
+$CellContext`w2$$}, VectorStyle -> {Gray, "PinDart"}], 
+          ParametricPlot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`v[$CellContext`t], 
+              $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+{$CellContext`t, 0, 10}, PlotStyle -> Directive[
+             CMYKColor[0.5, 1, 0.5]]]]], "Specifications" :> {
+        Style[
+        "model parameters", 
+         12], {{$CellContext`\[Epsilon]$$, 0.01, "\[Epsilon]"}, 0.001, 1, 
+         0.01, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Gamma]$$, 0.5, "\[Gamma]"}, 0., 1, 0.01,
+          ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Alpha]$$, 0.1, "\[Alpha]"}, 0., 1, 0.01,
+          ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`Iapp$$, 0.5, 
+          Subscript[
+           Style["I", Italic], "app"]}, 0., 1, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, Delimiter, 
+        Style[
+         Row[{
+           Style["v", Italic], " and ", 
+           Style["w", Italic], " ranges"}], 12], {{$CellContext`v1$$, -0.5, 
+          Subscript[
+           Style["v", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`v2$$, 1.5, 
+          Subscript[
+           Style["v", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w1$$, -0.5, 
+          Subscript[
+           Style["w", Italic], "left"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> "Labeled"}, {{$CellContext`w2$$, 1.5, 
+          Subscript[
+           Style["w", Italic], "right"]}, -0.5, 1.5, 0.01, ImageSize -> Tiny, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`p$$, {0.562, 0.17500000000000004`}, 
+          Style["p", Italic]}, {-1, -1}, {2, 2}}, 
+        Dynamic[
+         Module[{$CellContext`sol$}, $CellContext`sol$ = NDSolve[
+             
+             ReplaceAll[{$CellContext`\[Epsilon]$$ 
+                Derivative[
+                 1][$CellContext`v][$CellContext`t] == \
+($CellContext`v[$CellContext`t] (
+                   1 - $CellContext`v[$CellContext`t])) \
+($CellContext`v[$CellContext`t] - $CellContext`\[Alpha]$$) - \
+$CellContext`w[$CellContext`t] + $CellContext`Iapp$$, 
+               Derivative[
+                1][$CellContext`w][$CellContext`t] == \
+$CellContext`v[$CellContext`t] - $CellContext`\[Gamma]$$ \
+$CellContext`w[$CellContext`t], $CellContext`v[
+                0] == $CellContext`v0, $CellContext`w[
+                0] == $CellContext`w0}, {$CellContext`v0 -> 
+               Part[$CellContext`p$$, 1], $CellContext`w0 -> 
+               Part[$CellContext`p$$, 
+                 2]}], {$CellContext`v, $CellContext`w}, {$CellContext`t, 0, 
+              10}]; Show[
+            Plot[{
+              Evaluate[
+               ReplaceAll[{
+                 $CellContext`v[$CellContext`t], 
+                 $CellContext`w[$CellContext`t]}, $CellContext`sol$]], \
+$CellContext`\[Alpha]$$}, {$CellContext`t, 0, 10}, 
+             PlotRange -> {{-0.5, 
+                10}, {$CellContext`v1$$, $CellContext`v2$$}}, PlotLegends -> 
+             Placed[{$CellContext`v, $CellContext`w}, Above], ImageSize -> 
+             220, PlotStyle -> {
+               CMYKColor[1, 1, 0.5], 
+               CMYKColor[0., 1, 1], Dashed}, Epilog -> Inset[
+               Style["\[Alpha]", 12], {-0.2, $CellContext`\[Alpha]$$}]], 
+            Frame -> True, FrameLabel -> {"time (ms)"}]]]}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{626., {247., 252.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->192444126]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection",ExpressionUUID->"250499af-d2ed-4f22-a73f-f6ff15652a3b"],
+
+Cell["The traditional FitzHugh\[Dash]Nagumo equations [1] are", "DetailNotes",
+ CellChangeTimes->{{3.744747726705687*^9, 3.744747785768468*^9}, {
+  3.744773051082107*^9, 3.744773051621907*^9}, {3.759099401358912*^9, 
+  3.759099427573474*^9}, {3.7592394916356*^9, 3.759239503673667*^9}, {
+  3.759239776174378*^9, 3.759239776495365*^9}, {3.7608992967527237`*^9, 
+  3.760899300424954*^9}},
+ CellID->1583908248,
+ ExpressionUUID -> "f97d5bc1-e883-453d-89f5-23e43b8f61f3"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  TagBox[GridBox[{
+     {"\[Piecewise]", GridBox[{
+        {
+         RowBox[{"\[Epsilon]", 
+          FractionBox[
+           RowBox[{"d", "\[InvisibleSpace]", "v"}], 
+           RowBox[{"d", "\[InvisibleSpace]", "t"}]]}], 
+         RowBox[{"=", 
+          RowBox[{
+           RowBox[{"f", 
+            RowBox[{"(", "v", ")"}]}], "-", "w", "+", 
+           SubscriptBox["I", "app"]}]}]},
+        {
+         FractionBox[
+          RowBox[{"d", "\[InvisibleSpace]", "w"}], 
+          RowBox[{"d", "\[InvisibleSpace]", "t"}]], 
+         RowBox[{"=", 
+          RowBox[{"v", "-", 
+           RowBox[{"\[Gamma]", " ", "w"}]}]}]}
+       },
+       AllowedDimensions->{2, Automatic},
+       Editable->True,
+       GridBoxAlignment->{
+        "Columns" -> {{Right, Left}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+         "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}},
+       Selectable->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Right, Left}}, "ColumnsIndexed" -> {}, 
+      "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+    GridBoxItemSize->{
+     "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+      "RowsIndexed" -> {}}],
+   "Piecewise",
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False], TraditionalForm]], "InlineMath",
+ ExpressionUUID -> "a7f7e282-f14b-48b8-bbab-ab3fde239bd3"]], "DetailNotes",
+ CellChangeTimes->{{3.759240544524996*^9, 3.759240581734488*^9}},
+ CellID->1307531089,
+ ExpressionUUID -> "e94064cd-5cc3-49eb-9703-415c4912ab60"],
+
+Cell["where", "DetailNotes",
+ CellChangeTimes->{{3.744747792327591*^9, 3.744747792867181*^9}},
+ CellID->1210402563,ExpressionUUID->"faf4de91-5ce1-4c9c-aa4b-0fb1e660dd36"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"f", "(", "v", ")"}], "=", 
+    RowBox[{
+     RowBox[{"v", "(", 
+      RowBox[{"1", "-", "v"}], ")"}], 
+     RowBox[{"(", 
+      RowBox[{"v", "-", "\[Alpha]"}], ")"}]}]}], TraditionalForm]], 
+  "InlineMath",
+  ExpressionUUID -> "3a864316-d107-4cf8-8513-5990729dd3ca"],
+ ", for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"0", "<", "\[Alpha]", "<", "1"}], TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "cc76325f-e673-4bc6-9f2a-bdbdb34cf5bf"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Epsilon]", "\[LessLess]", "1"}], TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "e7446491-6ffc-427c-bcdf-9b0cec49603b"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{{3.7447477958093443`*^9, 3.744747836329795*^9}, {
+  3.7592395387437563`*^9, 3.759239594947815*^9}},
+ CellID->123288310,
+ ExpressionUUID -> "0c93f398-5d54-4033-98b0-818b8708ec87"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["I", "app"], TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "f9228490-76c0-4d1a-ae16-0911bd2633a4"],
+ " is the applied current. Typical values would be ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Alpha]", "=", "0.1"}], TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "0a6ff06b-07c2-41bd-a4f0-6214c702ca9f"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Gamma]", "=", "0.5"}], TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "08ecedfe-5642-482a-94a5-461497c9c6f4"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Epsilon]", "=", "0.01"}], TraditionalForm]], "InlineMath",
+  ExpressionUUID -> "4a4e26a6-e495-428f-b78f-74ac6e00e0e6"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{{3.7447478400615807`*^9, 3.7447478923554173`*^9}, {
+  3.759239642101632*^9, 3.759239649424837*^9}, {3.761585857589456*^9, 
+  3.7615858639632263`*^9}},
+ CellID->1932390462,
+ ExpressionUUID -> "1b961c06-ff16-4e6d-bc2a-66a1362ded0b"],
+
+Cell["Reference", "DetailNotes",
+ CellChangeTimes->{{3.759239342259104*^9, 3.759239343691897*^9}},
+ CellID->873104355,ExpressionUUID->"f7215a08-aae9-490c-b3b8-f87bd81e3964"],
+
+Cell[TextData[{
+ "[1] J. P. Keener and J. Sneyd",
+ StyleBox[", Mathematical Physiology",
+  FontSlant->"Italic"],
+ ", 2nd ed., New York: Springer, 2009."
+}], "DetailNotes",
+ CellChangeTimes->{{3.7590994382928667`*^9, 3.759099461564983*^9}, {
+  3.75909992421241*^9, 3.7590999344665422`*^9}, {3.759100063332077*^9, 
+  3.759100076848578*^9}, {3.7592396563206587`*^9, 3.759239676479389*^9}, {
+  3.759240774319273*^9, 3.759240796739608*^9}},
+ CellID->2029330437,
+ ExpressionUUID -> "59d9fd03-4944-4136-b03d-8b3af2c50b1a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection",ExpressionUUID->"55953c3a-c4c9-4d50-9c80-44063e31d21b"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[
+   " Resize Images",ExpressionUUID->"c0866496-d6f6-4db3-bf91-f48aac4bb3da"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.759154672902946*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "ResizeImages",ExpressionUUID->"3733d3be-66c5-4b0c-b032-f8ad68faacfa"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Rotate and Zoom in 3D",ExpressionUUID->
+    "27674c80-6e85-47f9-a3a6-66b6e503ff03"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "RotateAndZoomIn3D",ExpressionUUID->"71cd6172-a769-46be-9013-997f3f234efa"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[
+   " Drag Locators",ExpressionUUID->"643f4aa0-9469-4eb1-b08d-cc518325b5f9"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.7608970695779133`*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "DragLocators",ExpressionUUID->"1a44df45-55f9-4a97-82d6-e8b3f096d251"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Create and Delete Locators",ExpressionUUID->
+    "1b71ca62-1dbe-421f-bb04-85a0f419cd90"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "CreateAndDeleteLocators",ExpressionUUID->"06679475-506b-49d5-9177-\
+59b503736e7e"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[
+   " Slider Zoom",ExpressionUUID->"b008cbc8-3dfe-4069-8f71-e6edb9351ad3"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.7591546739809823`*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "SliderZoom",ExpressionUUID->"09d92382-6607-420f-8294-797c2cd603a4"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[
+   " Gamepad Controls",ExpressionUUID->
+    "a1784eff-8c7e-4879-ba17-275be0532827"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.7592397006154823`*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "GamepadControls",ExpressionUUID->"508bdc4d-c247-44b1-b5c1-d0e2cf3ff72d"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[
+   " Automatic Animation",ExpressionUUID->
+    "6097db4f-b244-4e66-9755-199c770f28ff"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.759239701217436*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "AutomaticAnimation",ExpressionUUID->"65daf33e-4a3c-4346-9dcc-d5e47f5eb8a6"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Bookmark Animation",ExpressionUUID->
+    "4bb25471-952d-4219-afa6-f1cff2e03113"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "BookmarkAnimation",ExpressionUUID->"deb5f152-52d7-4e98-b325-42cc8e996e39"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection",ExpressionUUID->"49c1476e-8302-4a95-8c49-b74fc94dac57"],
+
+Cell["", "RelatedLinksSection",ExpressionUUID->"ddc42f67-a6c1-477d-a3ad-43fb1d7df896"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection",ExpressionUUID->"db57c148-a4cd-4022-9908-f2322cad72e8"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Mikel Landajuela Larma",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/search.html?query=Mikel+Landajuela+\
+Larma"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/search.html?query=Mikel+Landajuela+\
+Larma"]
+}], "Author",
+ CellChangeTimes->{{3.7591547535773916`*^9, 3.759154788345458*^9}},
+ ExpressionUUID -> "fae46bb7-aa8f-4b89-8a18-e1c8650909c6"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{956, 794},
+WindowMargins->{{170, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[88235, 1908, 470, 11, 29, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[88708, 1921, 800, 19, 29, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[89511, 1942, 500, 14, 29, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[90014, 1958, 761, 19, 29, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[90778, 1979, 1004, 24, 29, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[91785, 2005, 517, 13, 29, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[92305, 2020, 1627, 35, 29, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[93935, 2057, 1030, 24, 29, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 96120, 2120},
+ {"RotateAndZoomIn3D", 96230, 2123},
+ {"DragLocators", 96340, 2126},
+ {"CreateAndDeleteLocators", 96456, 2129},
+ {"SliderZoom", 96570, 2132},
+ {"GamepadControls", 96677, 2135},
+ {"AutomaticAnimation", 96791, 2138},
+ {"BookmarkAnimation", 96908, 2141}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 639, 10, 108, "DemoTitle"],
+Cell[1222, 34, 88, 0, 275, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[1335, 38, 84, 0, 201, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[1444, 42, 21288, 478, 741, "Input",
+ CellID->14903349],
+Cell[22735, 522, 11468, 232, 511, "Output",
+ CellID->2038448170]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34252, 760, 91, 0, 181, "ManipulateCaptionSection"],
+Cell[34346, 762, 1176, 21, 39, "ManipulateCaption"],
+Cell[35525, 785, 758, 17, 23, "ManipulateCaption",
+ CellID->817168592]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36320, 807, 83, 0, 179, "ThumbnailSection"],
+Cell[36406, 809, 11468, 232, 511, "Output",
+ CellID->1391772599]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47911, 1046, 83, 0, 149, "SnapshotsSection"],
+Cell[47997, 1048, 11611, 234, 511, "Output",
+ CellID->1130188269],
+Cell[59611, 1284, 11593, 234, 511, "Output",
+ CellID->581379368],
+Cell[71207, 1520, 11570, 234, 511, "Output",
+ CellID->192444126]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[82814, 1759, 81, 0, 357, "DetailsSection"],
+Cell[82898, 1761, 466, 7, 23, "DetailNotes",
+ CellID->1583908248],
+Cell[83367, 1770, 1974, 53, 59, "DetailNotes",
+ CellID->1307531089],
+Cell[85344, 1825, 170, 2, 23, "DetailNotes",
+ CellID->1210402563],
+Cell[85517, 1829, 906, 27, 23, "DetailNotes",
+ CellID->123288310],
+Cell[86426, 1858, 983, 26, 27, "DetailNotes",
+ CellID->1932390462],
+Cell[87412, 1886, 173, 2, 23, "DetailNotes",
+ CellID->873104355],
+Cell[87588, 1890, 515, 11, 23, "DetailNotes",
+ CellID->2029330437]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[88140, 1906, 92, 0, 131, "ControlSuggestionsSection"],
+Cell[88235, 1908, 470, 11, 29, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[88708, 1921, 800, 19, 29, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[89511, 1942, 500, 14, 29, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[90014, 1958, 761, 19, 29, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[90778, 1979, 1004, 24, 29, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[91785, 2005, 517, 13, 29, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[92305, 2020, 1627, 35, 29, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[93935, 2057, 1030, 24, 29, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[94980, 2084, 85, 0, 165, "SearchTermsSection"],
+Cell[95068, 2086, 86, 0, 137, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[95179, 2090, 80, 0, 137, "AuthorSection"],
+Cell[95262, 2092, 450, 12, 23, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
