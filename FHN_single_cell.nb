@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    212423,       3907]
-NotebookOptionsPosition[    210849,       3869]
-NotebookOutlinePosition[    211241,       3885]
-CellTagsIndexPosition[    211198,       3882]
+NotebookDataLength[    216837,       4008]
+NotebookOptionsPosition[    215262,       3970]
+NotebookOutlinePosition[    215654,       3986]
+CellTagsIndexPosition[    215611,       3983]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -53,17 +53,18 @@ Cell[BoxData[{
    RowBox[{"constStimulation", "[", 
     RowBox[{
     "a_", ",", " ", "\[Gamma]_", ",", " ", "\[Epsilon]_", ",", " ", "Iext_", 
-     ",", " ", "tmin_", ",", " ", "tmax_", ",", "minV_", ",", " ", "maxV_", 
-     ",", " ", "minw_", ",", " ", "maxw_"}], "]"}], ":=", 
+     ",", " ", "p_", ",", " ", "tmin_", ",", " ", "tmax_", ",", "minV_", ",", 
+     " ", "maxV_", ",", " ", "minw_", ",", " ", "maxw_"}], "]"}], ":=", 
    RowBox[{"Module", "[", 
     RowBox[{
      RowBox[{"{", 
       RowBox[{
-      "eqV", ",", " ", "eqw", ",", " ", "eql", ",", " ", "sys", ",", " ", 
-       "vars", ",", " ", "init", ",", " ", "solution", ",", " ", 
-       "\[IndentingNewLine]", "timePlot", ",", " ", "nullClines", ",", " ", 
-       "vectorField", ",", " ", "phasePlot", ",", " ", "eqlPlot", ",", " ", 
-       "aPlot"}], "}"}], ",", "\[IndentingNewLine]", 
+      "eqV", ",", " ", "eqw", ",", " ", "eql", ",", " ", "jacob", ",", " ", 
+       "eig", ",", " ", "sys", ",", " ", "vars", ",", " ", "init", ",", " ", 
+       "solution", ",", " ", "\[IndentingNewLine]", "timePlot", ",", " ", 
+       "nullClines", ",", " ", "vectorField", ",", " ", "phasePlot", ",", " ",
+        "eqlPlot", ",", " ", "aPlot", ",", " ", "graphs"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{
        RowBox[{"eqV", "[", 
@@ -99,7 +100,26 @@ Cell[BoxData[{
           "}"}], ",", " ", 
          RowBox[{"{", 
           RowBox[{"V", ",", " ", "w"}], "}"}], ",", " ", "Reals"}], "]"}]}], 
-      ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"jacob", " ", "=", " ", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"eqV", "[", 
+            RowBox[{"V", ",", " ", "w"}], "]"}], ",", " ", 
+           RowBox[{"eqw", "[", 
+            RowBox[{"V", ",", " ", "w"}], "]"}]}], "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"{", 
+           RowBox[{"V", ",", " ", "w"}], "}"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"eig", " ", "=", " ", 
+       RowBox[{"Eigenvalues", "[", 
+        RowBox[{"jacob", "/.", 
+         RowBox[{"eql", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"sys", " ", "=", " ", 
        RowBox[{"{", 
         RowBox[{
@@ -127,18 +147,15 @@ Cell[BoxData[{
         RowBox[{
          RowBox[{"V", "[", "t", "]"}], ",", " ", 
          RowBox[{"w", "[", "t", "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
-      "\[IndentingNewLine]", 
+      
       RowBox[{"init", " ", "=", " ", 
        RowBox[{"Thread", "[", 
         RowBox[{
          RowBox[{"{", 
           RowBox[{
            RowBox[{"V", "[", "tmin", "]"}], ",", " ", 
-           RowBox[{"w", "[", "tmin", "]"}]}], "}"}], " ", "==", " ", 
-         RowBox[{
-          RowBox[{"Values", "[", "eql", "]"}], "[", 
-          RowBox[{"[", "1", "]"}], "]"}]}], " ", "]"}]}], ";", 
-      "\[IndentingNewLine]", 
+           RowBox[{"w", "[", "tmin", "]"}]}], "}"}], " ", "==", " ", "p"}], 
+        " ", "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"solution", " ", "=", " ", 
        RowBox[{"NDSolve", "[", 
         RowBox[{
@@ -156,6 +173,14 @@ Cell[BoxData[{
          RowBox[{"{", 
           RowBox[{"t", ",", " ", "tmin", ",", " ", "tmax"}], "}"}], ",", " ", 
          
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"tmin", ",", " ", "tmax"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"minV", ",", " ", "maxV"}], "}"}]}], "}"}]}], ",", 
+         "\[IndentingNewLine]", "\t\t\t", 
          RowBox[{"PlotStyle", " ", "\[Rule]", 
           RowBox[{"{", 
            RowBox[{
@@ -165,8 +190,8 @@ Cell[BoxData[{
          RowBox[{"FrameLabel", " ", "->", " ", 
           RowBox[{"{", 
            RowBox[{"\"\<t\>\"", ",", " ", "\"\<V, w\>\""}], "}"}]}], ",", " ", 
-         RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", "\n", 
+         RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]}], ";", "\n", 
+      "\[IndentingNewLine]", 
       RowBox[{"(*", " ", 
        RowBox[{"draw", " ", "null", " ", "clines"}], " ", "*)"}], 
       "\[IndentingNewLine]", 
@@ -264,16 +289,29 @@ Cell[BoxData[{
           RowBox[{"{", 
            RowBox[{"a", ",", " ", "maxw"}], "}"}]}], "}"}], "]"}]}], ";", 
       "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"GraphicsRow", "[", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"Show", "[", 
-           RowBox[{
-           "nullClines", ",", " ", "vectorField", ",", " ", "phasePlot", ",", 
-            " ", "eqlPlot", ",", " ", "aPlot"}], "]"}], ",", " ", 
-          "\[IndentingNewLine]", "\t\t\t", "timePlot"}], "}"}], ",", " ", 
-        RowBox[{"ImageSize", "\[Rule]", "Full"}]}], "]"}]}]}], 
+      RowBox[{"graphs", " ", "=", " ", 
+       RowBox[{"GraphicsRow", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Show", "[", 
+            RowBox[{
+            "nullClines", ",", " ", "vectorField", ",", " ", "phasePlot", ",",
+              " ", "eqlPlot", ",", " ", "aPlot"}], "]"}], ",", " ", 
+           "\[IndentingNewLine]", "\t\t\t", "timePlot"}], "}"}], ",", " ", 
+         RowBox[{"ImageSize", "\[Rule]", "Full"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Column", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Real equilibrium at \>\"", ",", " ", "eql"}], "}"}], 
+          "]"}], ",", " ", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{
+          "\"\<with corresponding eigenvalues: \>\"", ",", " ", "eig"}], 
+          "]"}], ",", "\[IndentingNewLine]", "graphs"}], "}"}], "]"}]}]}], 
     "\[IndentingNewLine]", "]"}]}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{"Manipulate", "[", 
@@ -281,9 +319,9 @@ Cell[BoxData[{
    RowBox[{"constStimulation", "[", 
     RowBox[{
     "a", ",", " ", "\[Gamma]", ",", " ", "\[Epsilon]", ",", " ", "Iext", ",", 
-     " ", "tmin", ",", " ", "tmax", ",", " ", "Vmin", ",", " ", "Vmax", ",", 
-     " ", "wmin", ",", "wmax"}], " ", "]"}], ",", " ", "\[IndentingNewLine]", 
-   
+     " ", "p", ",", "tmin", ",", " ", "tmax", ",", " ", "Vmin", ",", " ", 
+     "Vmax", ",", " ", "wmin", ",", "wmax"}], " ", "]"}], ",", " ", 
+   "\[IndentingNewLine]", 
    RowBox[{"Style", "[", 
     RowBox[{"\"\<Model parameters\>\"", ",", "12"}], "]"}], ",", 
    "\[IndentingNewLine]", 
@@ -311,14 +349,47 @@ Cell[BoxData[{
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"Iext", ",", "0.3", ",", 
+      RowBox[{"Iext", ",", "0.0", ",", 
        RowBox[{"Subscript", "[", 
         RowBox[{
          RowBox[{"Style", "[", 
           RowBox[{"\"\<I\>\"", ",", "Italic"}], "]"}], ",", "\"\<stim\>\""}], 
-        "]"}]}], "}"}], ",", "0.0", ",", "1", ",", ".01", ",", " ", 
+        "]"}]}], "}"}], ",", "0.0", ",", "2", ",", ".01", ",", " ", 
      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
    "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Initial conditions\>\"", ",", "12"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p", ",", 
+       RowBox[{"{", 
+        RowBox[{"0.0", ",", "0.0"}], "}"}], ",", 
+       RowBox[{"Style", "[", 
+        RowBox[{"\"\<p\>\"", ",", "Italic"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<t\>\"", ",", "Italic"}], "]"}], ",", "\"\<, \>\"", ",", 
+        
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<V\>\"", ",", "Italic"}], "]"}], ",", "\"\< and \>\"", 
+        ",", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<w\>\"", ",", "Italic"}], "]"}], ",", 
+        "\"\< ranges\>\""}], "}"}], "]"}], ",", "12"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
@@ -333,7 +404,7 @@ Cell[BoxData[{
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"tmax", ",", "20.0", ",", 
+      RowBox[{"tmax", ",", "1.0", ",", 
        RowBox[{"Subscript", "[", 
         RowBox[{
          RowBox[{"Style", "[", 
@@ -363,7 +434,7 @@ Cell[BoxData[{
          RowBox[{"Style", "[", 
           RowBox[{"\"\<V\>\"", ",", "Italic"}], "]"}], ",", "\"\<max\>\""}], 
         "]"}]}], "}"}], ",", 
-     RowBox[{"-", "1"}], ",", "1.5", ",", ".01", ",", " ", 
+     RowBox[{"-", "1"}], ",", "3", ",", ".01", ",", " ", 
      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
    "\[IndentingNewLine]", 
    RowBox[{"{", 
@@ -388,9 +459,9 @@ Cell[BoxData[{
          RowBox[{"Style", "[", 
           RowBox[{"\"\<w\>\"", ",", "Italic"}], "]"}], ",", "\"\<max\>\""}], 
         "]"}]}], "}"}], ",", 
-     RowBox[{"-", "1"}], ",", "1.5", ",", ".01", ",", " ", 
+     RowBox[{"-", "1"}], ",", "3", ",", ".01", ",", " ", 
      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}]}], 
-  "]"}]}], "Input",
+  "\[IndentingNewLine]", "]"}]}], "Input",
  CellChangeTimes->{{3.842942328206706*^9, 3.842942349648015*^9}, {
    3.842942528953335*^9, 3.842942530487138*^9}, {3.842942610957922*^9, 
    3.8429426395297203`*^9}, {3.842942731365045*^9, 3.8429427958207197`*^9}, {
@@ -432,16 +503,24 @@ Cell[BoxData[{
    3.843037920990107*^9, 3.843038037820527*^9}, {3.843038337416782*^9, 
    3.843038384352758*^9}, {3.843038506226368*^9, 3.843038745741453*^9}, {
    3.843038832303095*^9, 3.843038836064232*^9}, {3.8430388788682213`*^9, 
-   3.843038930446382*^9}, {3.8430391060252123`*^9, 3.84303911919318*^9}},
- CellLabel->
-  "In[1177]:=",ExpressionUUID->"970b385c-b19a-4ff3-bedf-d6f263f33dd5"],
+   3.843038930446382*^9}, {3.8430391060252123`*^9, 3.84303911919318*^9}, {
+   3.843108966786706*^9, 3.843108975800024*^9}, {3.843109010962325*^9, 
+   3.843109064263411*^9}, {3.843109106254633*^9, 3.8431092656212893`*^9}, {
+   3.843109305436079*^9, 3.8431094017747507`*^9}, 3.843109434546029*^9, {
+   3.8431094664365396`*^9, 3.843109477855762*^9}, {3.843109596002234*^9, 
+   3.843109642261256*^9}, {3.843109958047962*^9, 3.843110030970768*^9}, {
+   3.8431100637524557`*^9, 3.843110085803652*^9}, {3.843110540048871*^9, 
+   3.8431105441363487`*^9}, {3.843110600013399*^9, 3.843110602755101*^9}, {
+   3.843114395122109*^9, 3.84311444148672*^9}, {3.84311550249189*^9, 
+   3.843115502784816*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"970b385c-b19a-4ff3-bedf-d6f263f33dd5"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
    DynamicModuleBox[{$CellContext`a$$ = 0.2, $CellContext`Iext$$ = 
-    0.3, $CellContext`tmax$$ = 20., $CellContext`tmin$$ = 
-    0., $CellContext`Vmax$$ = 
+    0.1, $CellContext`p$$ = {0., 0.}, $CellContext`tmax$$ = 
+    1., $CellContext`tmin$$ = 0., $CellContext`Vmax$$ = 
     1.5, $CellContext`Vmin$$ = -0.5, $CellContext`wmax$$ = 
     1.5, $CellContext`wmin$$ = -0.5, $CellContext`\[Gamma]$$ = 
     0.4, $CellContext`\[Epsilon]$$ = 0.001, Typeset`show$$ = True, 
@@ -454,13 +533,24 @@ Cell[BoxData[
        Hold[$CellContext`\[Gamma]$$], 0.4, "\[Gamma]"}, 0., 1, 0.01}, {{
        Hold[$CellContext`\[Epsilon]$$], 0.001, "\[Epsilon]"}, 0.001, 1, 
       0.01}, {{
-       Hold[$CellContext`Iext$$], 0.3, 
+       Hold[$CellContext`Iext$$], 0., 
        Subscript[
-        Style["I", Italic], "stim"]}, 0., 1, 0.01}, {{
+        Style["I", Italic], "stim"]}, 0., 2, 0.01}, {
+      Hold[
+       Style["Initial conditions", 12]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`p$$], {0., 0.}, 
+       Style["p", Italic]}, {-1, -1}, {1, 1}}, {
+      Hold[
+       Style[
+        Row[{
+          Style["t", Italic], ", ", 
+          Style["V", Italic], " and ", 
+          Style["w", Italic], " ranges"}], 12]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
        Hold[$CellContext`tmin$$], 0., 
        Subscript[
         Style["t", Italic], "min"]}, 0, 1000, 1}, {{
-       Hold[$CellContext`tmax$$], 20., 
+       Hold[$CellContext`tmax$$], 1., 
        Subscript[
         Style["t", Italic], "max"]}, 0, 1000, 1}, {{
        Hold[$CellContext`Vmin$$], -0.5, 
@@ -468,20 +558,20 @@ Cell[BoxData[
         Style["V", Italic], "min"]}, -1, 1, 0.01}, {{
        Hold[$CellContext`Vmax$$], 1.5, 
        Subscript[
-        Style["V", Italic], "max"]}, -1, 1.5, 0.01}, {{
+        Style["V", Italic], "max"]}, -1, 3, 0.01}, {{
        Hold[$CellContext`wmin$$], -0.5, 
        Subscript[
         Style["w", Italic], "min"]}, -1, 1, 0.01}, {{
        Hold[$CellContext`wmax$$], 1.5, 
        Subscript[
-        Style["w", Italic], "max"]}, -1, 1.5, 0.01}}, Typeset`size$$ = {
-    986., {198., 203.15150016039252`}}, Typeset`update$$ = 0, 
-    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+        Style["w", Italic], "max"]}, -1, 3, 0.01}}, Typeset`size$$ = {
+    986., {217.8875, 223.5125}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`a$$ = 0.2, $CellContext`Iext$$ = 
-        0.3, $CellContext`tmax$$ = 20., $CellContext`tmin$$ = 
-        0., $CellContext`Vmax$$ = 
+        0., $CellContext`p$$ = {0., 0.}, $CellContext`tmax$$ = 
+        1., $CellContext`tmin$$ = 0., $CellContext`Vmax$$ = 
         1.5, $CellContext`Vmin$$ = -0.5, $CellContext`wmax$$ = 
         1.5, $CellContext`wmin$$ = -0.5, $CellContext`\[Gamma]$$ = 
         0.4, $CellContext`\[Epsilon]$$ = 0.001}, "ControllerVariables" :> {}, 
@@ -491,7 +581,7 @@ Cell[BoxData[
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
          Typeset`skipInitDone$$}, 
       "Body" :> $CellContext`constStimulation[$CellContext`a$$, $CellContext`\
-\[Gamma]$$, $CellContext`\[Epsilon]$$, $CellContext`Iext$$, \
+\[Gamma]$$, $CellContext`\[Epsilon]$$, $CellContext`Iext$$, $CellContext`p$$, \
 $CellContext`tmin$$, $CellContext`tmax$$, $CellContext`Vmin$$, \
 $CellContext`Vmax$$, $CellContext`wmin$$, $CellContext`wmax$$], 
       "Specifications" :> {
@@ -501,13 +591,20 @@ $CellContext`Vmax$$, $CellContext`wmin$$, $CellContext`wmax$$],
          "Labeled"}, {{$CellContext`\[Gamma]$$, 0.4, "\[Gamma]"}, 0., 1, 0.01,
           Appearance -> 
          "Labeled"}, {{$CellContext`\[Epsilon]$$, 0.001, "\[Epsilon]"}, 0.001,
-          1, 0.01, Appearance -> "Labeled"}, {{$CellContext`Iext$$, 0.3, 
+          1, 0.01, Appearance -> "Labeled"}, {{$CellContext`Iext$$, 0., 
           Subscript[
-           Style["I", Italic], "stim"]}, 0., 1, 0.01, Appearance -> 
-         "Labeled"}, Delimiter, {{$CellContext`tmin$$, 0., 
+           Style["I", Italic], "stim"]}, 0., 2, 0.01, Appearance -> 
+         "Labeled"}, Delimiter, 
+        Style["Initial conditions", 12], {{$CellContext`p$$, {0., 0.}, 
+          Style["p", Italic]}, {-1, -1}, {1, 1}}, Delimiter, 
+        Style[
+         Row[{
+           Style["t", Italic], ", ", 
+           Style["V", Italic], " and ", 
+           Style["w", Italic], " ranges"}], 12], {{$CellContext`tmin$$, 0., 
           Subscript[
            Style["t", Italic], "min"]}, 0, 1000, 1, Appearance -> 
-         "Labeled"}, {{$CellContext`tmax$$, 20., 
+         "Labeled"}, {{$CellContext`tmax$$, 1., 
           Subscript[
            Style["t", Italic], "max"]}, 0, 1000, 1, Appearance -> 
          "Labeled"}, {{$CellContext`Vmin$$, -0.5, 
@@ -515,15 +612,15 @@ $CellContext`Vmax$$, $CellContext`wmin$$, $CellContext`wmax$$],
            Style["V", Italic], "min"]}, -1, 1, 0.01, Appearance -> 
          "Labeled"}, {{$CellContext`Vmax$$, 1.5, 
           Subscript[
-           Style["V", Italic], "max"]}, -1, 1.5, 0.01, Appearance -> 
+           Style["V", Italic], "max"]}, -1, 3, 0.01, Appearance -> 
          "Labeled"}, {{$CellContext`wmin$$, -0.5, 
           Subscript[
            Style["w", Italic], "min"]}, -1, 1, 0.01, Appearance -> 
          "Labeled"}, {{$CellContext`wmax$$, 1.5, 
           Subscript[
-           Style["w", Italic], "max"]}, -1, 1.5, 0.01, Appearance -> 
+           Style["w", Italic], "max"]}, -1, 3, 0.01, Appearance -> 
          "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{1306., {283.6875, 289.3125}},
+     ImageSizeCache->{1306., {304.6875, 310.3125}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -536,9 +633,13 @@ $CellContext`Vmax$$, $CellContext`wmin$$, $CellContext`wmax$$],
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{{3.8430388413728952`*^9, 3.843038860595523*^9}, {
    3.843038904363212*^9, 3.843038932770452*^9}, 3.843039140096451*^9, 
-   3.843039172749605*^9},
- CellLabel->
-  "Out[1178]=",ExpressionUUID->"40225add-d8c0-44c2-99e5-eac04a6d7321"]
+   3.843039172749605*^9, {3.843109486106119*^9, 3.843109509284217*^9}, {
+   3.843109644299176*^9, 3.843109672881331*^9}, {3.843110088189427*^9, 
+   3.843110113375471*^9}, {3.843110550711255*^9, 3.843110555657283*^9}, {
+   3.8431106060053043`*^9, 3.843110616546432*^9}, 3.843113337406342*^9, 
+   3.843114115733781*^9, {3.843114418620558*^9, 3.843114442586568*^9}, 
+   3.84311533884562*^9, {3.843115504245461*^9, 3.843115515296856*^9}},
+ CellLabel->"Out[8]=",ExpressionUUID->"8c93fecb-6012-4e4d-973a-cbe9f4a2c6a6"]
 }, Open  ]]
 }, Open  ]],
 
@@ -598,7 +699,7 @@ Cell[BoxData[{
       RowBox[{"a", "\[Rule]", "0.1"}], ",", 
       RowBox[{"\[Gamma]", "\[Rule]", "0.5"}], ",", 
       RowBox[{"\[Epsilon]", "\[Rule]", "0.001"}]}], "}"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"sys", " ", "=", " ", 
    RowBox[{
@@ -3889,23 +3990,23 @@ Cell[580, 22, 1110, 16, 98, "Title",ExpressionUUID->"60091a76-509d-43e7-96e7-b2b
 Cell[CellGroupData[{
 Cell[1715, 42, 175, 3, 45, "Subsubsection",ExpressionUUID->"2b8a4bbe-5915-44a5-9e08-eca4fbe4458b"],
 Cell[CellGroupData[{
-Cell[1915, 49, 16741, 387, 876, "Input",ExpressionUUID->"970b385c-b19a-4ff3-bedf-d6f263f33dd5"],
-Cell[18659, 438, 4878, 102, 592, "Output",ExpressionUUID->"40225add-d8c0-44c2-99e5-eac04a6d7321"]
+Cell[1915, 49, 20010, 466, 1082, "Input",ExpressionUUID->"970b385c-b19a-4ff3-bedf-d6f263f33dd5"],
+Cell[21928, 517, 6022, 124, 634, "Output",ExpressionUUID->"8c93fecb-6012-4e4d-973a-cbe9f4a2c6a6"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23586, 546, 171, 3, 45, "Subsubsection",ExpressionUUID->"e5f69bf3-4f82-476e-8b0f-226021fbb6f4"],
+Cell[27999, 647, 171, 3, 45, "Subsubsection",ExpressionUUID->"e5f69bf3-4f82-476e-8b0f-226021fbb6f4"],
 Cell[CellGroupData[{
-Cell[23782, 553, 4589, 126, 300, "Input",ExpressionUUID->"19eca072-2d2f-4695-a971-a52279e7d2da"],
-Cell[28374, 681, 34817, 596, 383, "Output",ExpressionUUID->"e11d6be1-2e38-478c-b807-b9a9048281f1"]
+Cell[28195, 654, 4589, 126, 300, "Input",ExpressionUUID->"19eca072-2d2f-4695-a971-a52279e7d2da"],
+Cell[32787, 782, 34817, 596, 383, "Output",ExpressionUUID->"e11d6be1-2e38-478c-b807-b9a9048281f1"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[63228, 1282, 4448, 124, 300, "Input",ExpressionUUID->"c01fb54c-33e2-4e86-925f-803b4d84b3e0"],
-Cell[67679, 1408, 45280, 768, 380, "Output",ExpressionUUID->"0b4cdd0e-6ee2-4bb7-81f4-b5ffeb78190e"]
+Cell[67641, 1383, 4448, 124, 300, "Input",ExpressionUUID->"c01fb54c-33e2-4e86-925f-803b4d84b3e0"],
+Cell[72092, 1509, 45280, 768, 380, "Output",ExpressionUUID->"0b4cdd0e-6ee2-4bb7-81f4-b5ffeb78190e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[112996, 2181, 4499, 125, 300, "Input",ExpressionUUID->"0ecd315b-8b1f-41ed-8c0c-0c21860218de"],
-Cell[117498, 2308, 93311, 1556, 380, "Output",ExpressionUUID->"8b21ab58-03bc-4218-aeb6-c71b929d148d"]
+Cell[117409, 2282, 4499, 125, 300, "Input",ExpressionUUID->"0ecd315b-8b1f-41ed-8c0c-0c21860218de"],
+Cell[121911, 2409, 93311, 1556, 380, "Output",ExpressionUUID->"8b21ab58-03bc-4218-aeb6-c71b929d148d"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
