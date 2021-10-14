@@ -1,0 +1,557 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23975,        549]
+NotebookOptionsPosition[     23107,        524]
+NotebookOutlinePosition[     23529,        541]
+CellTagsIndexPosition[     23486,        538]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["FitzHugh-Nagumo model", "Title",
+ CellChangeTimes->{{3.842942328206706*^9, 3.842942349648015*^9}, {
+   3.842942528953335*^9, 3.842942530487138*^9}, {3.842942610957922*^9, 
+   3.8429426395297203`*^9}, {3.842942731365045*^9, 3.8429427958207197`*^9}, {
+   3.842942848027944*^9, 3.842942861574478*^9}, {3.842942948716159*^9, 
+   3.842943041069557*^9}, 3.8429431120864077`*^9, {3.8429431622482443`*^9, 
+   3.842943202343111*^9}, {3.842943369888687*^9, 3.842943371310557*^9}, {
+   3.84294361332917*^9, 3.8429436134522457`*^9}, 3.8429437457703323`*^9, {
+   3.842943786763708*^9, 3.842943787046707*^9}, {3.842943954672974*^9, 
+   3.8429439610484657`*^9}, {3.842944025406766*^9, 3.842944025546328*^9}, {
+   3.8429441149191628`*^9, 3.842944211111497*^9}, {3.842944242185499*^9, 
+   3.842944270210815*^9}, {3.8429443129040422`*^9, 3.842944396443818*^9}, {
+   3.842944581233832*^9, 3.842944587514669*^9}, {3.842944638928504*^9, 
+   3.842944640771428*^9}, {3.842947985031144*^9, 3.8429480153521013`*^9}, {
+   3.8430190996809807`*^9, 
+   3.843019114534772*^9}},ExpressionUUID->"60091a76-509d-43e7-96e7-\
+b2b41bc6b967"],
+
+Cell[CellGroupData[{
+
+Cell["Periodic stimulation", "Subsubsection",
+ CellChangeTimes->{{3.843019222208625*^9, 3.843019226189701*^9}, {
+  3.8431024179306154`*^9, 3.843102420886484*^9}, {3.8431026411300516`*^9, 
+  3.843102643123133*^9}},ExpressionUUID->"e5f69bf3-4f82-476e-8b0f-\
+226021fbb6f4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"periodicStimulation", "[", 
+    RowBox[{
+    "a_", ",", " ", "\[Gamma]_", ",", " ", "\[Epsilon]_", ",", " ", "tmin_", 
+     ",", " ", "tmax_", ",", " ", "period_", ",", " ", "duration_", ",", " ", 
+     "strength_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", " ", 
+      RowBox[{
+      "eqV", ",", " ", "eqw", ",", " ", "eql", ",", " ", "sys", ",", " ", 
+       "vars", ",", " ", "init", ",", " ", "solution", ",", "plotVw", ",", 
+       " ", "plotIext"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"eqV", "[", 
+        RowBox[{"V_", ",", "w_", ",", "Iext_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"1", "/", "\[Epsilon]"}], "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "w"}], " ", "+", " ", 
+          RowBox[{"V", "*", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", "V"}], ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{"V", "-", "a"}], ")"}]}], " ", "+", " ", "Iext"}], 
+         ")"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"eqw", "[", 
+        RowBox[{"V_", ",", "w_"}], "]"}], ":=", 
+       RowBox[{"V", "-", 
+        RowBox[{"\[Gamma]", "*", "w"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"sys", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"V", "[", "t", "]"}], ",", " ", "t"}], "]"}], " ", "==", 
+          " ", 
+          RowBox[{"eqV", "[", 
+           RowBox[{
+            RowBox[{"V", "[", "t", "]"}], ",", " ", 
+            RowBox[{"w", "[", "t", "]"}], ",", 
+            RowBox[{"Iext", "[", "t", "]"}]}], "]"}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"w", "[", "t", "]"}], ",", " ", "t"}], "]"}], " ", "==", 
+          " ", 
+          RowBox[{"eqw", "[", 
+           RowBox[{
+            RowBox[{"V", "[", "t", "]"}], ",", " ", 
+            RowBox[{"w", "[", "t", "]"}]}], "]"}]}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"vars", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"V", "[", "t", "]"}], ",", " ", 
+         RowBox[{"w", "[", "t", "]"}], ",", 
+         RowBox[{"Iext", "[", "t", "]"}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"init", " ", "=", " ", 
+       RowBox[{"Thread", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"V", "[", "0", "]"}], ",", " ", 
+           RowBox[{"w", "[", "0", "]"}], ",", 
+           RowBox[{"Iext", "[", "0", "]"}]}], "}"}], " ", "==", 
+         RowBox[{"{", 
+          RowBox[{"0.2", ",", " ", "0.0", ",", " ", "0.0"}], "}"}]}], "]"}]}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{"solution", " ", "=", " ", 
+       RowBox[{"NDSolve", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"sys", ",", " ", "init", ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"WhenEvent", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{"t", ",", "period"}], "]"}], "==", "0"}], ",", 
+             RowBox[{
+              RowBox[{"Iext", "[", "t", "]"}], "->", "strength"}]}], "]"}], 
+           ",", 
+           RowBox[{"WhenEvent", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{
+                RowBox[{"t", "-", "duration"}], ",", "period"}], "]"}], "==", 
+              "0"}], ",", 
+             RowBox[{
+              RowBox[{"Iext", "[", "t", "]"}], "->", "0"}]}], "]"}]}], 
+          "\[IndentingNewLine]", "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"V", ",", "w", ",", "Iext"}], "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "tmin", ",", " ", "tmax"}], "}"}], ",", "  ", 
+         RowBox[{"DiscreteVariables", "\[Rule]", 
+          RowBox[{"{", "Iext", "}"}]}]}], "]"}]}], ";", "\[IndentingNewLine]",
+       "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"plotVw", " ", "=", 
+         RowBox[{"Plot", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Evaluate", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"V", "[", "t", "]"}], ",", 
+                 RowBox[{"w", "[", "t", "]"}], ",", " ", 
+                 RowBox[{"Iext", "[", "t", "]"}]}], "}"}], "/.", 
+               RowBox[{"solution", "[", 
+                RowBox[{"[", 
+                 RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], ",", 
+             RowBox[{"Evaluate", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"V", "[", "t", "]"}], ",", 
+                 RowBox[{"w", "[", "t", "]"}], ",", " ", 
+                 RowBox[{"Iext", "[", "t", "]"}]}], "}"}], "/.", 
+               RowBox[{"solution", "[", 
+                RowBox[{"[", 
+                 RowBox[{"1", ",", "2"}], "]"}], "]"}]}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"t", ",", "tmin", ",", "tmax"}], "}"}], ",", " ", 
+           RowBox[{"FrameLabel", " ", "->", " ", 
+            RowBox[{"{", 
+             RowBox[{"\"\<t\>\"", ",", " ", "\"\<V, w\>\""}], "}"}]}], ",", 
+           RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"plotVw", " ", "=", 
+       RowBox[{"Plot", "[", 
+        RowBox[{
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"V", "[", "t", "]"}], ",", 
+             RowBox[{"w", "[", "t", "]"}]}], "}"}], "/.", "solution"}], "]"}],
+          ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "tmin", ",", "tmax"}], "}"}], ",", " ", 
+         RowBox[{"FrameLabel", " ", "->", " ", 
+          RowBox[{"{", 
+           RowBox[{"\"\<t\>\"", ",", " ", "\"\<V, w\>\""}], "}"}]}], ",", 
+         RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"plotIext", " ", "=", " ", 
+       RowBox[{"Plot", "[", 
+        RowBox[{
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{"Iext", "[", "t", "]"}], "/.", "solution"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "tmin", ",", "tmax"}], "}"}], ",", " ", 
+         RowBox[{"FrameLabel", " ", "->", " ", 
+          RowBox[{"{", 
+           RowBox[{"\"\<t\>\"", ",", " ", "\"\<Stimulation\>\""}], "}"}]}], 
+         ",", 
+         RowBox[{"PlotRange", "->", 
+          RowBox[{"{", 
+           RowBox[{"All", ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", " ", 
+      RowBox[{"GraphicsColumn", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"plotVw", ",", " ", "plotIext"}], "}"}], ",", " ", 
+        RowBox[{"ImageSize", "\[Rule]", "Full"}]}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.843107138088601*^9, 3.8431071820041027`*^9}, {
+   3.8431072610774746`*^9, 3.8431072819158316`*^9}, {3.843107573997506*^9, 
+   3.8431075771849804`*^9}, 3.8431076110695543`*^9, {3.8431076559229813`*^9, 
+   3.8431077326024303`*^9}, {3.8431081678571424`*^9, 3.84310818029568*^9}, {
+   3.843108582269555*^9, 3.843108632346286*^9}, {3.8431089798729596`*^9, 
+   3.8431090433766994`*^9}, {3.8431091564074993`*^9, 3.843109177242117*^9}, {
+   3.8431092557427025`*^9, 3.8431092583544736`*^9}, {3.84311082416166*^9, 
+   3.843110892820709*^9}, {3.8431111130654106`*^9, 3.8431112582799034`*^9}, {
+   3.8431113424001894`*^9, 3.843111381068322*^9}, {3.8431114539496636`*^9, 
+   3.8431114561775627`*^9}, {3.843111488396988*^9, 3.8431114923358717`*^9}, {
+   3.843111558606965*^9, 3.843111563237295*^9}, {3.8431116102082*^9, 
+   3.843111615915699*^9}, {3.8431118008998485`*^9, 3.8431118474363437`*^9}, {
+   3.843111919957762*^9, 3.8431119341911297`*^9}, {3.8431119889498014`*^9, 
+   3.843112111119375*^9}, {3.8431121591707067`*^9, 3.8431122659967947`*^9}, {
+   3.843112356771185*^9, 3.843112397507907*^9}, {3.843112505892433*^9, 
+   3.8431125065487013`*^9}, {3.8431125971903486`*^9, 
+   3.8431125993071733`*^9}, {3.8431129686695185`*^9, 
+   3.8431129990848675`*^9}, {3.843113652252433*^9, 3.843113672690135*^9}, {
+   3.8431147033038044`*^9, 3.8431147454960566`*^9}, {3.843114793735917*^9, 
+   3.8431148200792513`*^9}, {3.843116396319132*^9, 3.8431164006466017`*^9}, {
+   3.843116538167514*^9, 3.8431165420345874`*^9}, {3.8431166515311637`*^9, 
+   3.843116735077675*^9}, {3.8431168094588165`*^9, 3.8431168179733086`*^9}, {
+   3.843117282903694*^9, 3.843117316929188*^9}, {3.843117428356056*^9, 
+   3.8431175475288677`*^9}, 3.8431177207622747`*^9, {3.843117763718565*^9, 
+   3.843117767148288*^9}, {3.843117810452651*^9, 3.843117835860528*^9}, {
+   3.8431179059696903`*^9, 3.8431179318333273`*^9}, {3.843117962615127*^9, 
+   3.843117969498281*^9}, {3.84311800258477*^9, 3.84311801582268*^9}, {
+   3.843118097766322*^9, 3.843118183220064*^9}, {3.843118221861979*^9, 
+   3.843118265016621*^9}, {3.843118311693972*^9, 3.8431183546907997`*^9}, {
+   3.8431183927159452`*^9, 3.843118444905546*^9}, {3.843118480702435*^9, 
+   3.843118511541574*^9}, {3.84311875846964*^9, 3.843118799726491*^9}, 
+   3.8431190115478897`*^9, 3.843119045440691*^9},
+ CellLabel->"In[27]:=",ExpressionUUID->"001c496c-56d4-4cf1-8fea-773bea1dd7c2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"periodicStimulation", "[", 
+     RowBox[{
+     "a", ",", " ", "\[Gamma]", ",", " ", "\[Epsilon]", ",", " ", "tmin", ",",
+       " ", "tmax", ",", " ", "period", ",", "duration", ",", "strength"}], 
+     "]"}], ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"\"\<Model parameters\>\"", ",", "12"}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"a", ",", "0.2", ",", "\"\<a\>\""}], "}"}], ",", "0.0", ",", 
+      "1", ",", ".01", ",", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Gamma]", ",", "0.4", ",", "\"\<\[Gamma]\>\""}], "}"}], ",", 
+      "0.0", ",", "1", ",", ".01", ",", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Epsilon]", ",", "0.001", ",", "\"\<\[Epsilon]\>\""}], "}"}],
+       ",", "0.001", ",", "1", ",", ".01", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"tmin", ",", "0.0", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<t\>\"", ",", "Italic"}], "]"}], ",", "\"\<min\>\""}], 
+         "]"}]}], "}"}], ",", "0", ",", "1000", ",", "1", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"tmax", ",", "20.0", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<t\>\"", ",", "Italic"}], "]"}], ",", "\"\<max\>\""}], 
+         "]"}]}], "}"}], ",", "0", ",", "1000", ",", "1", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Vmin", ",", 
+        RowBox[{"-", "0.5"}], ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<V\>\"", ",", "Italic"}], "]"}], ",", "\"\<min\>\""}], 
+         "]"}]}], "}"}], ",", 
+      RowBox[{"-", "1"}], ",", "1", ",", ".01", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Vmax", ",", "1.5", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<V\>\"", ",", "Italic"}], "]"}], ",", "\"\<max\>\""}], 
+         "]"}]}], "}"}], ",", 
+      RowBox[{"-", "1"}], ",", "1.5", ",", ".01", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"wmin", ",", 
+        RowBox[{"-", "0.5"}], ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<w\>\"", ",", "Italic"}], "]"}], ",", "\"\<min\>\""}], 
+         "]"}]}], "}"}], ",", 
+      RowBox[{"-", "1"}], ",", "1", ",", ".01", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"wmax", ",", "1.5", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<w\>\"", ",", "Italic"}], "]"}], ",", "\"\<max\>\""}], 
+         "]"}]}], "}"}], ",", 
+      RowBox[{"-", "1"}], ",", "1.5", ",", ".01", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"period", ",", "1", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{"\"\<Stimuli\>\"", ",", "\"\<period\>\""}], "]"}]}], "}"}], 
+      ",", "0", ",", "10", ",", ".1", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"duration", ",", "0.1", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{"\"\<Stimuli\>\"", ",", "\"\<duration\>\""}], "]"}]}], "}"}],
+       ",", "0", ",", "1", ",", "0.01", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"strength", ",", "0.5", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{"\"\<Stimuli\>\"", ",", "\"\<strength\>\""}], "]"}]}], "}"}],
+       ",", "0", ",", "2", ",", "0.01", ",", " ", 
+      RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}]}], 
+   "]"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.8431086648697367`*^9, 3.8431087163023305`*^9}, {
+   3.8431087489756956`*^9, 3.8431088791723003`*^9}, 3.8431091220240335`*^9, 
+   3.843109229144806*^9, {3.8431108079292955`*^9, 3.8431108083511815`*^9}, {
+   3.8431109353673067`*^9, 3.8431110440837526`*^9}, {3.84311251216005*^9, 
+   3.843112512738395*^9}, 3.843113178616173*^9, {3.8431145197525516`*^9, 
+   3.843114522353815*^9}, {3.8431149143834567`*^9, 3.843114924004426*^9}, {
+   3.843115250191483*^9, 3.8431152507698464`*^9}, {3.843115783344263*^9, 
+   3.8431157868902454`*^9}, 3.843116886284869*^9, {3.843116919755539*^9, 
+   3.8431169268067503`*^9}, {3.843117576669807*^9, 3.843117693093114*^9}, {
+   3.843117858063685*^9, 3.8431178773606873`*^9}, {3.843118642890566*^9, 
+   3.84311864313278*^9}, 3.843118733260841*^9},
+ CellLabel->"In[24]:=",ExpressionUUID->"171a80c9-f1e1-4bc5-80a3-773a5c123e61"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 0.2, $CellContext`duration$$ = 
+    0.2, $CellContext`period$$ = 1, $CellContext`strength$$ = 
+    0.5, $CellContext`tmax$$ = 20., $CellContext`tmin$$ = 
+    0., $CellContext`Vmax$$ = 
+    1.5, $CellContext`Vmin$$ = -0.5, $CellContext`wmax$$ = 
+    1.5, $CellContext`wmin$$ = -0.5, $CellContext`\[Gamma]$$ = 
+    0.4, $CellContext`\[Epsilon]$$ = 0.001, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["Model parameters", 12]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`a$$], 0.2, "a"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.4, "\[Gamma]"}, 0., 1, 0.01}, {{
+       Hold[$CellContext`\[Epsilon]$$], 0.001, "\[Epsilon]"}, 0.001, 1, 
+      0.01}, {{
+       Hold[$CellContext`tmin$$], 0., 
+       Subscript[
+        Style["t", Italic], "min"]}, 0, 1000, 1}, {{
+       Hold[$CellContext`tmax$$], 20., 
+       Subscript[
+        Style["t", Italic], "max"]}, 0, 1000, 1}, {{
+       Hold[$CellContext`Vmin$$], -0.5, 
+       Subscript[
+        Style["V", Italic], "min"]}, -1, 1, 0.01}, {{
+       Hold[$CellContext`Vmax$$], 1.5, 
+       Subscript[
+        Style["V", Italic], "max"]}, -1, 1.5, 0.01}, {{
+       Hold[$CellContext`wmin$$], -0.5, 
+       Subscript[
+        Style["w", Italic], "min"]}, -1, 1, 0.01}, {{
+       Hold[$CellContext`wmax$$], 1.5, 
+       Subscript[
+        Style["w", Italic], "max"]}, -1, 1.5, 0.01}, {{
+       Hold[$CellContext`period$$], 1, 
+       Subscript["Stimuli", "period"]}, 0, 10, 0.1}, {{
+       Hold[$CellContext`duration$$], 0.1, 
+       Subscript["Stimuli", "duration"]}, 0, 1, 0.01}, {{
+       Hold[$CellContext`strength$$], 0.5, 
+       Subscript["Stimuli", "strength"]}, 0, 2, 0.01}}, Typeset`size$$ = {
+    817., {512., 518.3607309367039}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 0.2, $CellContext`duration$$ = 
+        0.1, $CellContext`period$$ = 1, $CellContext`strength$$ = 
+        0.5, $CellContext`tmax$$ = 20., $CellContext`tmin$$ = 
+        0., $CellContext`Vmax$$ = 
+        1.5, $CellContext`Vmin$$ = -0.5, $CellContext`wmax$$ = 
+        1.5, $CellContext`wmin$$ = -0.5, $CellContext`\[Gamma]$$ = 
+        0.4, $CellContext`\[Epsilon]$$ = 0.001}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`periodicStimulation[$CellContext`a$$, \
+$CellContext`\[Gamma]$$, $CellContext`\[Epsilon]$$, $CellContext`tmin$$, \
+$CellContext`tmax$$, $CellContext`period$$, $CellContext`duration$$, \
+$CellContext`strength$$], "Specifications" :> {
+        Style[
+        "Model parameters", 12], {{$CellContext`a$$, 0.2, "a"}, 0., 1, 0.01, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`\[Gamma]$$, 0.4, "\[Gamma]"}, 0., 1, 0.01,
+          Appearance -> 
+         "Labeled"}, {{$CellContext`\[Epsilon]$$, 0.001, "\[Epsilon]"}, 0.001,
+          1, 0.01, Appearance -> "Labeled"}, {{$CellContext`tmin$$, 0., 
+          Subscript[
+           Style["t", Italic], "min"]}, 0, 1000, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`tmax$$, 20., 
+          Subscript[
+           Style["t", Italic], "max"]}, 0, 1000, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`Vmin$$, -0.5, 
+          Subscript[
+           Style["V", Italic], "min"]}, -1, 1, 0.01, Appearance -> 
+         "Labeled"}, {{$CellContext`Vmax$$, 1.5, 
+          Subscript[
+           Style["V", Italic], "max"]}, -1, 1.5, 0.01, Appearance -> 
+         "Labeled"}, {{$CellContext`wmin$$, -0.5, 
+          Subscript[
+           Style["w", Italic], "min"]}, -1, 1, 0.01, Appearance -> 
+         "Labeled"}, {{$CellContext`wmax$$, 1.5, 
+          Subscript[
+           Style["w", Italic], "max"]}, -1, 1.5, 0.01, Appearance -> 
+         "Labeled"}, {{$CellContext`period$$, 1, 
+          Subscript["Stimuli", "period"]}, 0, 10, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`duration$$, 0.1, 
+          Subscript["Stimuli", "duration"]}, 0, 1, 0.01, Appearance -> 
+         "Labeled"}, {{$CellContext`strength$$, 0.5, 
+          Subscript["Stimuli", "strength"]}, 0, 2, 0.01, Appearance -> 
+         "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{1281., {803.861328125, 811.138671875}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8431169367668905`*^9, 3.843117697619516*^9, 
+  3.8431177810277576`*^9, 3.843117842373765*^9, 3.843117877891899*^9, 
+  3.843118453109036*^9, 3.843118514174178*^9, 3.843118646815675*^9, 
+  3.843118733815095*^9, 3.8431187690040913`*^9, 3.843118882899639*^9},
+ CellLabel->"Out[24]=",ExpressionUUID->"4c456e1a-2498-4e59-8937-8fe41137e069"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440., 765.75},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+Magnification:>1.3 Inherited,
+FrontEndVersion->"12.3 for Linux x86 (64-bit) (July 9, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"46259233-27e1-4c8a-a9ed-c5225e0fb2c1"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1110, 16, 127, "Title",ExpressionUUID->"60091a76-509d-43e7-96e7-b2b41bc6b967"],
+Cell[CellGroupData[{
+Cell[1715, 42, 270, 4, 57, "Subsubsection",ExpressionUUID->"e5f69bf3-4f82-476e-8b0f-226021fbb6f4"],
+Cell[1988, 48, 9527, 213, 537, "Input",ExpressionUUID->"001c496c-56d4-4cf1-8fea-773bea1dd7c2"],
+Cell[CellGroupData[{
+Cell[11540, 265, 6022, 143, 406, "Input",ExpressionUUID->"171a80c9-f1e1-4bc5-80a3-773a5c123e61"],
+Cell[17565, 410, 5502, 109, 1639, "Output",ExpressionUUID->"4c456e1a-2498-4e59-8937-8fe41137e069"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
