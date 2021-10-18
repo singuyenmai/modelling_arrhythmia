@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[   1622300,      28231]
-NotebookOptionsPosition[   1618652,      28164]
-NotebookOutlinePosition[   1619044,      28180]
-CellTagsIndexPosition[   1619001,      28177]
+NotebookDataLength[   1622760,      28243]
+NotebookOptionsPosition[   1619014,      28175]
+NotebookOutlinePosition[   1619406,      28191]
+CellTagsIndexPosition[   1619363,      28188]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -28158,7 +28158,18 @@ Cell[BoxData[
   3.843195734806703*^9, {3.8431958379664392`*^9, 3.843195871888648*^9}, {
    3.843198526923505*^9, 3.843198537930935*^9}, 3.843198612541381*^9},
  CellLabel->"Out[29]=",ExpressionUUID->"911c29ba-2eb9-42ba-8261-22f9a37f82f6"]
-}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myRounding", "[", "x_", "]"}], ":=", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FractionalPart", "[", "x", "]"}], "<", "0.5"}], ",", " ", 
+    RowBox[{"Floor", "[", "x", "]"}], ",", " ", 
+    RowBox[{"Ceiling", "[", "x", "]"}]}], "]"}]}]], "Input",ExpressionUUID->\
+"33968e0c-69ba-4b57-bc67-95d02a96b64a"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -28230,7 +28241,8 @@ Cell[CellGroupData[{
 Cell[1617098, 28122, 819, 20, 51, "Input",ExpressionUUID->"4a528169-4c6a-4ecc-a51a-708b546f7a30"],
 Cell[1617920, 28144, 362, 7, 33, "Output",ExpressionUUID->"a3742563-45d8-4bc6-b5bb-712abd347405"],
 Cell[1618285, 28153, 327, 6, 33, "Output",ExpressionUUID->"911c29ba-2eb9-42ba-8261-22f9a37f82f6"]
-}, Open  ]]
+}, Open  ]],
+Cell[1618627, 28162, 359, 9, 29, "Input",ExpressionUUID->"33968e0c-69ba-4b57-bc67-95d02a96b64a"]
 }, Open  ]]
 }, Open  ]]
 }
